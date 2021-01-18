@@ -9,11 +9,12 @@ import Foundation
 import Alamofire
 
 enum Endpoint {
-    case coinPrice(info: CoinPriceParams)
+    case simplePrice(info: CoinPriceParams)
+    case coinsList
     
     var params: [String : Any] {
         switch self {
-        case .coinPrice(let info):
+        case .simplePrice(let info):
                 return [
                     "ids": info.id,
                     "vs_currencies": info.currency,
@@ -22,6 +23,8 @@ enum Endpoint {
                     "include_24hr_change": info.includeDailyChange,
                     "include_last_updated_at": info.includeLastUpdatedAt
                 ]
+        case .coinsList:
+            return [:]
         }
     }
     
@@ -34,14 +37,16 @@ enum Endpoint {
     
     var path: String {
         switch self {
-        case .coinPrice:
+        case .simplePrice:
             return "simple/price?"
+        case .coinsList:
+            return "/coins/list"
         }
     }
     
     var url: String {
         switch self {
-        case .coinPrice:
+        default:
             return baseUrl + path
         }
     }

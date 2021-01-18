@@ -11,7 +11,7 @@ let chosenCurrency = "usd"
 let choosenCrypto = "bitcoin"
 
 struct CoinPrice: Codable {
-    let coin: Coin
+    let coin: CoinPriceDetail
     
     private static var coinKey: String {
         return choosenCrypto
@@ -31,11 +31,11 @@ struct CoinPrice: Codable {
     init(from decoder:Decoder) throws {
         let priceValue = try decoder.container(keyedBy: CoinCodingKey.self)
         let coinKey = CoinCodingKey(stringValue: CoinPrice.coinKey)!
-        coin = try priceValue.decode(Coin.self, forKey: coinKey)
+        coin = try priceValue.decode(CoinPriceDetail.self, forKey: coinKey)
     }
 }
 
-struct Coin: Codable {
+struct CoinPriceDetail: Codable {
     let price: Int
     let marketCap, dailyVol, dailyChange: Double?
     let lastUpdatedAt: Int?
@@ -74,13 +74,13 @@ struct Coin: Codable {
 
         let baseKeyValue = try decoder.container(keyedBy: CurrencyCodingKey.self)
         
-        let coinKey = CurrencyCodingKey(stringValue: Coin.priceKey)!
+        let coinKey = CurrencyCodingKey(stringValue: CoinPriceDetail.priceKey)!
         price = try baseKeyValue.decode(Int.self, forKey: coinKey)
-        let marketCapKey = CurrencyCodingKey(stringValue: Coin.marketCapKey)!
+        let marketCapKey = CurrencyCodingKey(stringValue: CoinPriceDetail.marketCapKey)!
         marketCap = try baseKeyValue.decode(Double.self, forKey: marketCapKey)
-        let dailyVolKey = CurrencyCodingKey(stringValue: Coin.dailyVolKey)!
+        let dailyVolKey = CurrencyCodingKey(stringValue: CoinPriceDetail.dailyVolKey)!
         dailyVol = try baseKeyValue.decode(Double.self, forKey: dailyVolKey)
-        let dailyChangeKey = CurrencyCodingKey(stringValue: Coin.dailyChangeKey)!
+        let dailyChangeKey = CurrencyCodingKey(stringValue: CoinPriceDetail.dailyChangeKey)!
         dailyChange = try baseKeyValue.decode(Double.self, forKey: dailyChangeKey)
     }
 }
