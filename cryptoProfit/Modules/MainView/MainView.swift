@@ -23,18 +23,8 @@ struct MainView: View {
                     }
                     
                     ForEach(coinList, id: \.id) { coin in
-                        NavigationLink(destination: CoinView()) {
-                            HStack {
-                                Text(coin.symbol)
-                                    .font(Font.headline.weight(.bold))
-                                    .textCase(.uppercase)
-                                    .frame(width: 100, height: 30, alignment: .leading)
-                                    .minimumScaleFactor(0.5)
-                                Text(coin.name)
-                                    .font(Font.headline.weight(.light))
-                                    .textCase(.lowercase)
-                                Spacer()
-                            }.padding(40)
+                        NavigationLink(destination: CoinView(coin: coin)) {
+                            CoinItem(coin: coin)
                         }
                     }
                 }
