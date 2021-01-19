@@ -15,28 +15,36 @@ struct MainView: View {
             ScrollView {
                 LazyVStack {
                     HStack {
-                        Text("Coins List")
-//                            .font(.custom(Fonts.quicksandSemiBold, size: 18))
+                        Spacer()
+                        Text("Select Coin")
+                            //                            .font(.custom(Fonts.quicksandSemiBold, size: 18))
                             .padding([.top, .leading])
                         Spacer()
                     }
                     
                     ForEach(coinList, id: \.id) { coin in
-                        HStack {
-                            Text(coin.symbol)
-                            Spacer()
-                            Text(coin.name)
-                        }.padding()
-                        
+                        NavigationLink(destination: CoinView()) {
+                            HStack {
+                                Text(coin.symbol)
+                                    .font(Font.headline.weight(.bold))
+                                    .textCase(.uppercase)
+                                    .frame(width: 100, height: 30, alignment: .leading)
+                                    .minimumScaleFactor(0.5)
+                                Text(coin.name)
+                                    .font(Font.headline.weight(.light))
+                                    .textCase(.lowercase)
+                                Spacer()
+                            }.padding(40)
+                        }
                     }
                 }
             }
             .navigationTitle("Plutus")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-//                    NavigationLink(destination: AddComparisonScreen(isShowingDetailsScreen: $isShowingDetailsScreen, listOfComparisons: $listOfComparisons)) {
-//                        Image(systemSymbol: .plus)
-//                    }
+                    //                    NavigationLink(destination: AddComparisonScreen(isShowingDetailsScreen: $isShowingDetailsScreen, listOfComparisons: $listOfComparisons)) {
+                    //                        Image(systemSymbol: .plus)
+                    //                    }
                 }
             }
         }
