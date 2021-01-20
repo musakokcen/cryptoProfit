@@ -81,6 +81,7 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.2.0):
     - GoogleUtilities/Logger
+  - Introspect (0.1.2)
   - MBProgressHUD (1.2.0)
   - nanopb (2.30907.0):
     - nanopb/decode (= 2.30907.0)
@@ -100,6 +101,7 @@ DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Crashlytics
   - Firebase/RemoteConfig
+  - Introspect
   - MBProgressHUD
   - Purchases
   - SwiftLint
@@ -120,6 +122,7 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
+    - Introspect
     - MBProgressHUD
     - nanopb
     - PromisesObjC
@@ -142,6 +145,7 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 688d7f00e2894d9e13823ed9a028b13b993bc277
   GoogleDataTransport: 1024b1a4dfbd7a0e92cb20d7e0a6f1fb66b449a4
   GoogleUtilities: d866834472f1324d080496bc67ab3ce5d0d46027
+  Introspect: 85a29d2c5ee4d3d15469ad0b75fd8839f3e72674
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   nanopb: 59221d7f958fb711001e6a449489542d92ae113e
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
@@ -149,6 +153,6 @@ SPEC CHECKSUMS:
   PurchasesCoreSwift: 895deec08743781bfc2e0e22345c994ed83bb7ab
   SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
 
-PODFILE CHECKSUM: 77972203980a887e40fcdc90e0d9f6dfb46a449c
+PODFILE CHECKSUM: deac033bf55c4eb2b2fbb7a1e397a8af745a8dc5
 
 COCOAPODS: 1.10.1

@@ -15,6 +15,7 @@ target 'cryptoProfit' do
   pod 'Purchases'
   pod 'Amplitude'
   pod 'AppsFlyerFramework'
+  pod "Introspect"
   target 'cryptoProfitTests' do
     inherit! :search_paths
     # Pods for testing
