@@ -23,13 +23,15 @@ struct MainView: View {
                     }
                     
                     ForEach(coinList, id: \.id) { coin in
-                        NavigationLink(destination: CoinView(coin: coin)) {
-                            CoinItem(coin: coin)
+                        if UIImage(named: "color/\(coin.symbol)") != nil {
+                            NavigationLink(destination: CoinView(coin: coin)) {
+                                CoinItem(coin: coin)
+                            }
                         }
                     }
                 }
             }
-            .navigationTitle("Plutus")
+            .navigationTitle("Crypto Profit")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     //                    NavigationLink(destination: AddComparisonScreen(isShowingDetailsScreen: $isShowingDetailsScreen, listOfComparisons: $listOfComparisons)) {
