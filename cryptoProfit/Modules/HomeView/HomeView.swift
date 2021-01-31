@@ -28,10 +28,6 @@ struct HomeView: View {
                     
                     ForEach(coinList, id: \.id) { coin in
                         CoinListItem(coin: coin)
-//                                NavigationLink(destination: CoinView(coin: coin)) {
-//                                CoinItem(coin: coin)
-//                            }
-                        
                     }
                 }
             }

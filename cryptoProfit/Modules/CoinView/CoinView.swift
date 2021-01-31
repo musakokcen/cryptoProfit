@@ -8,35 +8,22 @@
 import SwiftUI
 import Introspect
 
-#if canImport(UIKit)
-extension View {
-    func hideKeyboard() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-    }
-}
-#endif
-
-extension  UITextField {
-   @objc func doneButtonTapped(button:UIBarButtonItem) -> Void {
-      self.resignFirstResponder()
-   }
-}
-
-
 struct CoinView: View {
-    let coin: CoinInfo
+    let coin: CoinMarketData
     
     @State var purchasedPrice: String = ""
     @State var purchasedAmount: String = ""
     @State private var purchasedDate = Date()
     @State var currency: Currency = Currency.USD
     @State var showCurrencySelector: Bool = false
+   
+    var coinIcon: Image
     
     var body: some View {
         GeometryReader { geometry in
             ZStack {
                 VStack {
-                        Image("color/\(coin.symbol)")
+                    coinIcon
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: geometry.size.width, height: geometry.size.height / 3, alignment: .center)
@@ -167,6 +154,33 @@ struct CoinView: View {
 
 struct CoinView_Previews: PreviewProvider {
     static var previews: some View {
-        CoinView(coin: CoinInfo(id: "bitcoin", symbol: "btc", name: "Bitcoin"), purchasedPrice: "34,850.5", purchasedAmount: "0.04")
+        let data = CoinMarketData(
+            id: "bitcoin",
+            symbol : "btc",
+            name : "Bitcoin",
+            image : "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
+            currentPrice : 33904.0456,
+            marketCap : 630362181507,
+            marketCapRank : 1,
+            fullyDilutedValuation: 0,
+            totalVolume: 0,
+            high24H: 0,
+            low24H: 0,
+            priceChange24H: 0,
+            priceChangePercentage24H: 3.0555,
+            marketCapChange24H: 0,
+            marketCapChangePercentage24H: 0,
+            circulatingSupply: 0,
+            totalSupply: 0,
+            maxSupply: 0,
+            ath: 0,
+            athChangePercentage: 0,
+            athDate: "string",
+            atl: 0,
+            atlChangePercentage: 0,
+            atlDate: "String",
+            roi: nil,
+            lastUpdated: "String")
+        CoinView(coin: data, purchasedPrice: "34,850.5", purchasedAmount: "0.04", coinIcon: Image(systemName: "creditcard.circle"))
     }
 }

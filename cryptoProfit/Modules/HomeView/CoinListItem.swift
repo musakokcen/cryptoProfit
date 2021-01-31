@@ -14,36 +14,37 @@ struct CoinListItem: View {
     @State var coinIcon = Image(systemName: "creditcard.circle")
     
     var body: some View {
-        HStack {
-            coinIcon
-                .resizable()
-                .frame(width: 40, height: 40, alignment: .leading)
-            Text(coin.symbol)
-                .font(Font.headline.weight(.bold))
-                .textCase(.uppercase)
-                .frame(width: 40, height: 30, alignment: .leading)
-            Text(coin.name)
-                .font(Font.headline.weight(.medium))
-                .textCase(.none)
-                .frame(width: 80, height: 30, alignment: .leading)
-            Text("\(coin.currentPrice, specifier: "%.2f")$")
-                .frame(width: 80, height: 30, alignment: .leading)
-            Image(systemName: coin.priceChangePercentage24H > 0 ? "arrow.up.square.fill" : "arrow.down.square.fill")
-                .foregroundColor(coin.priceChangePercentage24H > 0 ?  .green : .red)
-                .font(.system(size: 30.0, weight: .thin))
-            Text("%\(coin.priceChangePercentage24H, specifier: "%.2f")")
-            Spacer()
+        NavigationLink(destination: CoinView(coin: coin, coinIcon: coinIcon)) {
+            HStack {
+                coinIcon
+                    .resizable()
+                    .frame(width: 40, height: 40, alignment: .leading)
+                Text(coin.symbol)
+                    .font(Font.headline.weight(.bold))
+                    .textCase(.uppercase)
+                    .frame(width: 40, height: 30, alignment: .leading)
+                Text(coin.name)
+                    .font(Font.headline.weight(.medium))
+                    .textCase(.none)
+                    .frame(width: 80, height: 30, alignment: .leading)
+                Text("\(coin.currentPrice, specifier: "%.2f")$")
+                    .frame(width: 80, height: 30, alignment: .leading)
+                Image(systemName: coin.priceChangePercentage24H > 0 ? "arrow.up.square.fill" : "arrow.down.square.fill")
+                    .foregroundColor(coin.priceChangePercentage24H > 0 ?  .green : .red)
+                    .font(.system(size: 30.0, weight: .thin))
+                Text("%\(coin.priceChangePercentage24H, specifier: "%.2f")")
+                Spacer()
+            }
+            .lineLimit(1)
+            .minimumScaleFactor(0.4)
+            .padding([.top, .bottom], 10)
+            .padding([.leading, .trailing], 5)
+            .frame(width: .none, height: 60, alignment: .leading)
+            .onAppear(perform: {
+                fetchIcon()
+            })
         }
-        .lineLimit(1)
-        .minimumScaleFactor(0.4)
-        .padding([.top, .bottom], 10)
-        .padding([.leading, .trailing], 5)
-        .frame(width: .none, height: 60, alignment: .leading)
-        .onAppear(perform: {
-            fetchIcon()
-        })
     }
-    
     private func fetchIcon() {
         let resource = ImageResource(downloadURL: URL(string: coin.image)!)
         KingfisherManager.shared.retrieveImage(with: resource) { (result) in
