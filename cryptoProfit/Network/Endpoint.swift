@@ -29,7 +29,7 @@ enum Endpoint {
         case .coinMarketData(let query):
             return [
                 "vs_currency": query.currency ?? "usd",
-//                "ids" : "nil",
+                "ids" : query.ids ?? " ",
                 "order" : "market_cap_desc",
                 "per_page": query.coinsPerPage,
                 "page" : query.page
@@ -73,7 +73,7 @@ enum Endpoint {
 
 struct coinMarketDataParams {
     let currency: String?
-    let ids: [String]?
+    let ids: String?
     let coinsPerPage: Int
     let page: Int
     let priceChangeRange: String?

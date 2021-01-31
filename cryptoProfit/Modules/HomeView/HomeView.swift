@@ -9,7 +9,9 @@ import SwiftUI
 
 struct HomeView: View {
     @State private var coinList: [CoinMarketData] = []
+    @State private var investmentList: [PurchasedCoin] = []
     @State private var selectedView = 0
+    
     private var fetchedCoinListPage = 1
     var body: some View {
         NavigationView {
@@ -25,9 +27,16 @@ struct HomeView: View {
                         .padding()
                         Spacer()
                     }
-                    
-                    ForEach(coinList, id: \.id) { coin in
-                        CoinListItem(coin: coin)
+                    if selectedView == 0 {
+                        ForEach(coinList, id: \.id) { coin in
+                            CoinListItem(coin: coin)
+                        }
+                    } else {
+                        ForEach(investmentList, id: \.id) { coin in
+                            if let coin = coinList.first(where: {$0.id == coin.id}) {
+                                InvestmentListItem(coin: coin)
+                            }
+                        }
                     }
                 }
             }
@@ -40,6 +49,14 @@ struct HomeView: View {
         .navigationViewStyle(StackNavigationViewStyle())
         .onAppear(perform: {
             fetchCoinList()
+            if let list = UserDefaultsConfig.purchasedCryptoCoins {
+                investmentList = list
+            }
+        })
+        .onChange(of: UserDefaultsConfig.purchasedCryptoCoins, perform: { value in
+            if let list = UserDefaultsConfig.purchasedCryptoCoins {
+                investmentList = list
+            }
         })
     }
     
@@ -50,6 +67,7 @@ struct HomeView: View {
                 case .success(let data):
                     let sortedData = data.sorted{$0.marketCap > $1.marketCap }
                     coinList.append(contentsOf: sortedData)
+                    selectedView = UserDefaultsConfig.purchasedCryptoCoins == nil ? 0 : 1
                 case .failure(let err):
                     print(err)
                 }
