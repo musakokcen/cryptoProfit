@@ -6,6 +6,7 @@ target 'cryptoProfit' do
   use_frameworks!
 
   # Pods for cryptoProfit
+  pod 'Kingfisher', '~> 6.0'
   pod 'Alamofire'
   pod 'SwiftLint'
   pod 'Firebase/Analytics'
@@ -15,6 +16,7 @@ target 'cryptoProfit' do
   pod 'Purchases'
   pod 'Amplitude'
   pod 'AppsFlyerFramework'
+  pod "Introspect"
   target 'cryptoProfitTests' do
     inherit! :search_paths
     # Pods for testing

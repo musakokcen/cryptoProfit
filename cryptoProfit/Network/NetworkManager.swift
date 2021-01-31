@@ -44,11 +44,6 @@ final class NetworkManager {
                         completion(.success(EmptyResponse() as! T))
                         return
                     }
-                    //do {
-                    //    let cryptoCurrencies = try JSONDecoder().decode([CurrencyResponse].self, from: priceJSON.data(using: .utf8)!)
-                    //} catch {
-                    //    print(error)
-                    //}
                     do {
                         let decodedObject = try JSONDecoder().decode(type, from: data)
                         completion(.success(decodedObject))

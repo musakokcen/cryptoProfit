@@ -9,22 +9,32 @@ import Foundation
 import Alamofire
 
 enum Endpoint {
-    case simplePrice(info: CoinPriceParams)
+    case simplePrice(query: CoinPriceParams)
     case coinsList
+    case coinMarketData(query: coinMarketDataParams)
     
     var params: [String : Any] {
         switch self {
-        case .simplePrice(let info):
+        case .simplePrice(let query):
                 return [
-                    "ids": info.id,
-                    "vs_currencies": info.currency,
-                    "include_market_cap": info.includeMarketCap,
-                    "include_24hr_vol": info.includeDailyVolume,
-                    "include_24hr_change": info.includeDailyChange,
-                    "include_last_updated_at": info.includeLastUpdatedAt
+                    "ids": query.id,
+                    "vs_currencies": query.currency,
+                    "include_market_cap": query.includeMarketCap,
+                    "include_24hr_vol": query.includeDailyVolume,
+                    "include_24hr_change": query.includeDailyChange,
+                    "include_last_updated_at": query.includeLastUpdatedAt
                 ]
         case .coinsList:
             return [:]
+        case .coinMarketData(let query):
+            return [
+                "vs_currency": query.currency ?? "usd",
+//                "ids" : "nil",
+                "order" : "market_cap_desc",
+                "per_page": query.coinsPerPage,
+                "page" : query.page
+//                "price_change_percentage": "24h", // "1h", "7d" etc
+            ]
         }
     }
     
@@ -40,7 +50,9 @@ enum Endpoint {
         case .simplePrice:
             return "simple/price?"
         case .coinsList:
-            return "/coins/list"
+            return "coins/list"
+        case .coinMarketData:
+            return "coins/markets"
         }
     }
     
@@ -57,6 +69,14 @@ enum Endpoint {
             return HTTPMethod.get
         }
     }
+}
+
+struct coinMarketDataParams {
+    let currency: String?
+    let ids: [String]?
+    let coinsPerPage: Int
+    let page: Int
+    let priceChangeRange: String?
 }
 
 struct CoinPriceParams {
