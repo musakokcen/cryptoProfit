@@ -34,9 +34,6 @@ struct MainView: View {
             .navigationTitle("Crypto Profit")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    //                    NavigationLink(destination: AddComparisonScreen(isShowingDetailsScreen: $isShowingDetailsScreen, listOfComparisons: $listOfComparisons)) {
-                    //                        Image(systemSymbol: .plus)
-                    //                    }
                 }
             }
         }
@@ -47,7 +44,7 @@ struct MainView: View {
     }
     
     private func fetchPriceForCoin() {
-        NetworkManager.shared.request(type: CoinPrice.self, endpoint: Endpoint.simplePrice(info: CoinPriceParams(id: "bitcoin", currency: "usd"))) { (result) in
+        NetworkManager.shared.request(type: CoinPrice.self, endpoint: Endpoint.simplePrice(query: CoinPriceParams(id: "bitcoin", currency: "usd"))) { (result) in
             switch result {
             case .success(let data):
                 print(data)

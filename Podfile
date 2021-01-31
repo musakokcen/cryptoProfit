@@ -6,6 +6,7 @@ target 'cryptoProfit' do
   use_frameworks!
 
   # Pods for cryptoProfit
+  pod 'Kingfisher', '~> 6.0'
   pod 'Alamofire'
   pod 'SwiftLint'
   pod 'Firebase/Analytics'
