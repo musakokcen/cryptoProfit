@@ -9,6 +9,8 @@ import SwiftUI
 import Introspect
 
 struct CoinView: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     let coin: CoinMarketData
     
     @State var purchasedPrice: String = ""
@@ -17,13 +19,14 @@ struct CoinView: View {
     @State var currency: Currency = Currency.USD
     @State var showCurrencySelector: Bool = false
    
+    
     var coinIcon: Image
     
     var body: some View {
         GeometryReader { geometry in
             ZStack {
                 VStack {
-                    Spacer()
+                    Spacer().frame(width: .none, height: 150, alignment: .center)
                     HStack {
                         coinIcon
                             .resizable()
@@ -55,11 +58,12 @@ struct CoinView: View {
                         Text("Purchased at: ")
                             .padding(.leading)
                         Spacer()
-                        TextField("enter purchased price", text: $purchasedPrice)
+                        TextField("enter purchased price $", text: $purchasedPrice)
                             .keyboardType(.decimalPad)
                             .multilineTextAlignment(.trailing)
                             .keyboardType(.decimalPad)
                             .minimumScaleFactor(0.5)
+                            .padding(.trailing)
                             .introspectTextField { (textField) in
                                 let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: textField.frame.size.width, height: 44))
                                 let flexButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
@@ -69,9 +73,6 @@ struct CoinView: View {
                                 toolBar.setItems([flexButton, doneButton], animated: true)
                                 textField.inputAccessoryView = toolBar
                             }
-                        Text("$")
-                            .padding(.trailing)
-                            .foregroundColor(.black)
 //                        Picker(currency.name, selection: $currency) {
 //                            ForEach(Currency.allCases) { v in
 //                                Text(v.name).tag(v)
@@ -132,7 +133,22 @@ struct CoinView: View {
                     HStack {
                         Spacer()
                         Button("Start Tracking") {
+                            let purchasedItem = PurchasedCoin(purchasedPrice: purchasedPrice,
+                                purchasedAmount: purchasedAmount,
+                                id: coin.id,
+                                symbol: coin.symbol,
+                                name: coin.name,
+                                image: coin.image,
+                                latestPrice: coin.currentPrice,
+                                lastUpdated: coin.lastUpdated)
+                            if var savedItems = UserDefaultsConfig.purchasedCryptoCoins {
+                                savedItems.append(purchasedItem)
+                                UserDefaultsConfig.purchasedCryptoCoins = savedItems
+                            } else {
+                                UserDefaultsConfig.purchasedCryptoCoins = [purchasedItem]
+                            }
                             
+                            presentationMode.wrappedValue.dismiss()
                         }
                         .font(Font.system(size: 22, weight: .heavy))
                         .foregroundColor(.black)
