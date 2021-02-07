@@ -156,6 +156,7 @@ struct CoinView: View {
                     }
                     .padding(EdgeInsets(.init(top: 50, leading: 0, bottom: 0, trailing: 0)))
                     Spacer()
+                        .frame(width: .none, height: geometry.size.height / 3, alignment: .center)
                 }
                 if showCurrencySelector {
                     Picker("Currency", selection: $currency) {

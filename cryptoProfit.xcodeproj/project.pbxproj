@@ -17,7 +17,6 @@
 		4D8E660F25C72A720051C656 /* UserDefaultConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8E660E25C72A720051C656 /* UserDefaultConfig.swift */; };
 		4D8E661825C736130051C656 /* InvestmentListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8E661725C736130051C656 /* InvestmentListItem.swift */; };
 		4D903C9F25B59C4700B9C251 /* cryptoProfitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D903C9E25B59C4700B9C251 /* cryptoProfitApp.swift */; };
-		4D903CA125B59C4700B9C251 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D903CA025B59C4700B9C251 /* ContentView.swift */; };
 		4D903CA325B59C4B00B9C251 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D903CA225B59C4B00B9C251 /* Assets.xcassets */; };
 		4D903CA625B59C4B00B9C251 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D903CA525B59C4B00B9C251 /* Preview Assets.xcassets */; };
 		4D903CB125B59C4B00B9C251 /* cryptoProfitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D903CB025B59C4B00B9C251 /* cryptoProfitTests.swift */; };
@@ -64,7 +63,6 @@
 		4D8E661725C736130051C656 /* InvestmentListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestmentListItem.swift; sourceTree = "<group>"; };
 		4D903C9B25B59C4700B9C251 /* cryptoProfit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cryptoProfit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D903C9E25B59C4700B9C251 /* cryptoProfitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cryptoProfitApp.swift; sourceTree = "<group>"; };
-		4D903CA025B59C4700B9C251 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4D903CA225B59C4B00B9C251 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4D903CA525B59C4B00B9C251 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4D903CA725B59C4B00B9C251 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -183,7 +181,6 @@
 			isa = PBXGroup;
 			children = (
 				4D903C9E25B59C4700B9C251 /* cryptoProfitApp.swift */,
-				4D903CA025B59C4700B9C251 /* ContentView.swift */,
 				4D903CA225B59C4B00B9C251 /* Assets.xcassets */,
 				4D903CA725B59C4B00B9C251 /* Info.plist */,
 				4D903D7A25B5B63300B9C251 /* Models */,
@@ -524,7 +521,6 @@
 				4D8E660F25C72A720051C656 /* UserDefaultConfig.swift in Sources */,
 				4D63A00D25C6D4FC00C849B0 /* CoinMarket.swift in Sources */,
 				4D903CF725B5AE4C00B9C251 /* NetworkManager.swift in Sources */,
-				4D903CA125B59C4700B9C251 /* ContentView.swift in Sources */,
 				4D903D7C25B5B65200B9C251 /* CoinPrice.swift in Sources */,
 				4D8E660A25C729CD0051C656 /* PurchasedCoin.swift in Sources */,
 				4D903D8425B5C56100B9C251 /* Endpoint.swift in Sources */,
