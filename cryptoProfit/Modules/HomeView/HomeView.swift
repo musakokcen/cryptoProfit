@@ -9,10 +9,16 @@ import SwiftUI
 
 struct HomeView: View {
     @State private var coinList: [CoinMarketData] = []
-    @State private var investmentList: [PurchasedCoin] = []
-    @State private var selectedView = 0
+    @State private var investmentList: [PurchasedCoin]? = UserDefaultsConfig.purchasedCryptoCoins {
+        didSet {
+            selectedView = (investmentList?.count ?? 0) > 0 ? 1 : 0
+        }
+    }
+    
+    @State private var selectedView = (UserDefaultsConfig.purchasedCryptoCoins?.count ?? 0) > 0 ? 1 : 0
     
     private var fetchedCoinListPage = 1
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -32,14 +38,25 @@ struct HomeView: View {
                             CoinListItem(coin: coin)
                         }
                     } else {
-                        ForEach(investmentList, id: \.id) { coin in
-                            if let coin = coinList.first(where: {$0.id == coin.id}) {
-                                InvestmentListItem(coin: coin)
+                        if let investmentList = investmentList {
+                            ForEach(investmentList, id: \.id) { coin in
+                                if let coin = coinList.first(where: {$0.id == coin.id}) {
+                                    InvestmentListItem(coin: coin)
+                                }
                             }
+                            .onDelete(perform: { indexSet in
+                                self.investmentList?.remove(atOffsets: indexSet)
+                                UserDefaultsConfig.purchasedCryptoCoins = investmentList
+                            })
                         }
                     }
                 }
             }
+            .onAppear(perform: {
+                if investmentList != UserDefaultsConfig.purchasedCryptoCoins {
+                    investmentList = UserDefaultsConfig.purchasedCryptoCoins
+                }
+            })
             .navigationTitle("Crypto Profit")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -49,14 +66,6 @@ struct HomeView: View {
         .navigationViewStyle(StackNavigationViewStyle())
         .onAppear(perform: {
             fetchCoinList()
-            if let list = UserDefaultsConfig.purchasedCryptoCoins {
-                investmentList = list
-            }
-        })
-        .onChange(of: UserDefaultsConfig.purchasedCryptoCoins, perform: { value in
-            if let list = UserDefaultsConfig.purchasedCryptoCoins {
-                investmentList = list
-            }
         })
     }
     
