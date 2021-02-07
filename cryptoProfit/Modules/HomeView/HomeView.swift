@@ -9,8 +9,16 @@ import SwiftUI
 
 struct HomeView: View {
     @State private var coinList: [CoinMarketData] = []
-    @State private var selectedView = 0
+    @State private var investmentList: [PurchasedCoin]? = UserDefaultsConfig.purchasedCryptoCoins {
+        didSet {
+            selectedView = (investmentList?.count ?? 0) > 0 ? 1 : 0
+        }
+    }
+    
+    @State private var selectedView = (UserDefaultsConfig.purchasedCryptoCoins?.count ?? 0) > 0 ? 1 : 0
+    
     private var fetchedCoinListPage = 1
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -25,16 +33,30 @@ struct HomeView: View {
                         .padding()
                         Spacer()
                     }
-                    
-                    ForEach(coinList, id: \.id) { coin in
-                        CoinListItem(coin: coin)
-//                                NavigationLink(destination: CoinView(coin: coin)) {
-//                                CoinItem(coin: coin)
-//                            }
-                        
+                    if selectedView == 0 {
+                        ForEach(coinList, id: \.id) { coin in
+                            CoinListItem(coin: coin)
+                        }
+                    } else {
+                        if let investmentList = investmentList {
+                            ForEach(investmentList, id: \.id) { coin in
+                                if let coin = coinList.first(where: {$0.id == coin.id}) {
+                                    InvestmentListItem(coin: coin)
+                                }
+                            }
+                            .onDelete(perform: { indexSet in
+                                self.investmentList?.remove(atOffsets: indexSet)
+                                UserDefaultsConfig.purchasedCryptoCoins = investmentList
+                            })
+                        }
                     }
                 }
             }
+            .onAppear(perform: {
+                if investmentList != UserDefaultsConfig.purchasedCryptoCoins {
+                    investmentList = UserDefaultsConfig.purchasedCryptoCoins
+                }
+            })
             .navigationTitle("Crypto Profit")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -54,6 +76,7 @@ struct HomeView: View {
                 case .success(let data):
                     let sortedData = data.sorted{$0.marketCap > $1.marketCap }
                     coinList.append(contentsOf: sortedData)
+                    selectedView = UserDefaultsConfig.purchasedCryptoCoins == nil ? 0 : 1
                 case .failure(let err):
                     print(err)
                 }

@@ -1,17 +1,21 @@
 //
-//  CoinListItem.swift
+//  InvestmentListItem.swift
 //  cryptoProfit
 //
-//  Created by Musa Kokcen on 19.01.2021.
+//  Created by Musa Kokcen on 31.01.2021.
 //
 
 import SwiftUI
 import Kingfisher
 
-struct CoinListItem: View {
+struct InvestmentListItem: View {
     var coin: CoinMarketData
     
     @State var coinIcon = Image(systemName: "creditcard.circle")
+    @State var investmentCoinInfo: PurchasedCoin? = nil
+    
+    @State var profitValue: Double = 0
+    @State var profitPercentage: Double = 0
     
     var body: some View {
         NavigationLink(destination: CoinView(coin: coin, coinIcon: coinIcon)) {
@@ -27,12 +31,12 @@ struct CoinListItem: View {
                     .font(Font.headline.weight(.medium))
                     .textCase(.none)
                     .frame(width: 80, height: 30, alignment: .leading)
-                Text("\(coin.currentPrice, specifier: "%.2f")$")
+                Text("\(profitValue, specifier: "%.2f")$")
                     .frame(width: 80, height: 30, alignment: .leading)
-                Image(systemName: coin.priceChangePercentage24H > 0 ? "arrow.up.square.fill" : "arrow.down.square.fill")
-                    .foregroundColor(coin.priceChangePercentage24H > 0 ?  .green : .red)
+                Image(systemName: profitValue > 0 ? "arrow.up.square.fill" : "arrow.down.square.fill")
+                    .foregroundColor(profitValue > 0 ?  .green : .red)
                     .font(.system(size: 30.0, weight: .thin))
-                Text("%\(coin.priceChangePercentage24H, specifier: "%.2f")")
+                Text("%\(profitPercentage, specifier: "%.2f")")
                 Spacer()
             }
             .lineLimit(1)
@@ -42,9 +46,14 @@ struct CoinListItem: View {
             .frame(width: .none, height: 60, alignment: .leading)
             .onAppear(perform: {
                 fetchIcon()
+                if let investmentCoinInfo = UserDefaultsConfig.purchasedCryptoCoins?.first(where: {$0.id == coin.id}), let purchasedPrice = Double(investmentCoinInfo.purchasedPrice), let amount = Double(investmentCoinInfo.purchasedAmount) {
+                    profitValue =  (coin.currentPrice - purchasedPrice) * amount
+                    profitPercentage = (profitValue / (purchasedPrice * amount)) * 100
+                }
             })
         }
     }
+    
     private func fetchIcon() {
         let resource = ImageResource(downloadURL: URL(string: coin.image)!)
         KingfisherManager.shared.retrieveImage(with: resource) { (result) in
@@ -58,7 +67,7 @@ struct CoinListItem: View {
     }
 }
 
-struct CoinListItem_Previews: PreviewProvider {
+struct InvestmentListItem_Previews: PreviewProvider {
     static var previews: some View {
         let coin = CoinMarketData(
             id: "bitcoin",
@@ -88,7 +97,7 @@ struct CoinListItem_Previews: PreviewProvider {
             roi: nil,
             lastUpdated: "String")
 
-        CoinListItem(coin: coin, coinIcon: Image(systemName: "creditcard.circle"))
+        InvestmentListItem(coin: coin, coinIcon: Image(systemName: "creditcard.circle"))
             .previewLayout(.sizeThatFits)
     }
 }
