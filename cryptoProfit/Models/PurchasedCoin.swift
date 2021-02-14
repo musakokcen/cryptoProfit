@@ -8,8 +8,8 @@
 import Foundation
 
 struct PurchasedCoin: Codable, Equatable, Hashable {
-    let purchasedPrice: String
-    let purchasedAmount: String
+    var purchasedPrice: String
+    var purchasedAmount: String
     let id, symbol, name: String
     let image: String
     let latestPrice: Double // for the time that user created this record

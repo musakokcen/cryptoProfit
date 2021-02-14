@@ -8,17 +8,27 @@
 import SwiftUI
 import Introspect
 
+class InvestmentDetails: ObservableObject {
+    @Published var purchasedPrice: String = ""
+    @Published var purchasedAmount: String = ""
+    @Published var updatedWithPrice: String = ""
+    @Published var updatetWithAmount: String = ""
+}
+
 struct CoinView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     let coin: CoinMarketData
     
-    @State var purchasedPrice: String = ""
-    @State var purchasedAmount: String = ""
+    @ObservedObject var investmentDetails = InvestmentDetails()
+    
     @State private var purchasedDate = Date()
     @State var currency: Currency = Currency.USD
     @State var showCurrencySelector: Bool = false
-    @State private var fitsInScreen = true
+    @State var showInsertDeleteButtons: Bool = false
+    @State var isAdditionalInfoViewHidden: Bool = true
+    @State var buttonTitle: String = "Add Investment"
+    @State var isPlusTapped: Bool = false
     
     var coinIcon: Image
     
@@ -52,90 +62,87 @@ struct CoinView: View {
                         
                         Spacer().frame(width: .none, height: 24, alignment: .center)
                         
-                        VStack(spacing: 8) {
+                        InformationView(isMain: true, details: investmentDetails).environmentObject(investmentDetails)
+                        
+                        if !isAdditionalInfoViewHidden {
+                            InformationView(isMain: false, details: investmentDetails)
+                        }
+                        
+                        if showInsertDeleteButtons {
                             HStack {
-                                Text("Purchased at: ")
-                                    .padding(.leading)
-                                Spacer()
-                                TextField("enter purchased price $", text: $purchasedPrice)
-                                    .keyboardType(.decimalPad)
-                                    .multilineTextAlignment(.trailing)
-                                    .keyboardType(.decimalPad)
-                                    .minimumScaleFactor(0.5)
-                                    .padding(.trailing)
-                                    .introspectTextField { (textField) in
-                                        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: textField.frame.size.width, height: 44))
-                                        let flexButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-                                        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(textField.doneButtonTapped(button:)))
-                                        doneButton.tintColor = .systemPink
-                                        toolBar.items = [flexButton, doneButton]
-                                        toolBar.setItems([flexButton, doneButton], animated: true)
-                                        textField.inputAccessoryView = toolBar
-                                    }
-                            }
-                            HStack {
-                                Text("Purchased amount: ")
-                                    .padding(.leading)
-                                Spacer()
-                                
-                                TextField("enter purchased amount", text: $purchasedAmount, onCommit:  {
-                                    
-                                    //                        hideKeyboard()
-                                })
-                                .minimumScaleFactor(0.5)
-                                .keyboardType(.decimalPad)
-                                .multilineTextAlignment(.trailing)
-                                .keyboardType(.decimalPad)
-                                .padding(.trailing)
-                                .introspectTextField { (textField) in
-                                    let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: textField.frame.size.width, height: 44))
-                                    let flexButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-                                    let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(textField.doneButtonTapped(button:)))
-                                    doneButton.tintColor = .systemPink
-                                    toolBar.items = [flexButton, doneButton]
-                                    toolBar.setItems([flexButton, doneButton], animated: true)
-                                    textField.inputAccessoryView = toolBar
+                                Button(action: {
+                                    isAdditionalInfoViewHidden = false
+                                    isPlusTapped = true
+                                    showInsertDeleteButtons = false
+                                }) {
+                                    Image(uiImage: UIImage(named: "insert")!)
                                 }
                                 
+                                Spacer()
+                                    .frame(width: 54, height: .none, alignment: .center)
+                                
+                                Button(action: {
+                                    isAdditionalInfoViewHidden = false
+                                    isPlusTapped = false
+                                    showInsertDeleteButtons = false
+                                }) {
+                                    Image(uiImage: UIImage(named: "remove")!)
+                                }
                             }
                         }
                         
-                        HStack {
-                            Spacer()
-                            Button("Add Investment") {
-                                let purchasedItem = PurchasedCoin(purchasedPrice: purchasedPrice,
-                                                                  purchasedAmount: purchasedAmount,
-                                                                  id: coin.id,
-                                                                  symbol: coin.symbol,
-                                                                  name: coin.name,
-                                                                  image: coin.image,
-                                                                  latestPrice: coin.currentPrice,
-                                                                  lastUpdated: coin.lastUpdated)
-                                if var savedItems = UserDefaultsConfig.purchasedCryptoCoins {
-                                    savedItems.append(purchasedItem)
-                                    UserDefaultsConfig.purchasedCryptoCoins = savedItems
-                                } else {
-                                    UserDefaultsConfig.purchasedCryptoCoins = [purchasedItem]
+                        if !showInsertDeleteButtons {
+                            HStack {
+                                Spacer()
+                                Button(buttonTitle) {
+                                    updateInvestments()
                                 }
-                                
-                                presentationMode.wrappedValue.dismiss()
+                                .font(Font.system(size: 22, weight: .heavy))
+                                .foregroundColor(Color(UIColor(red: 0.36, green: 0.725, blue: 0.072, alpha: 1)))
+                                Spacer()
                             }
-                            .font(Font.system(size: 22, weight: .heavy))
-                            .foregroundColor(Color(UIColor(red: 0.36, green: 0.725, blue: 0.072, alpha: 1)))
-                            Spacer()
+                            .padding(EdgeInsets(.init(top: 50, leading: 0, bottom: 0, trailing: 0)))
+                            
                         }
-                        .padding(EdgeInsets(.init(top: 50, leading: 0, bottom: 0, trailing: 0)))
+                        
+                        if showInsertDeleteButtons {
+                            HStack {
+                                Spacer()
+                                Button("Remove Investment") {
+                                    
+                                    if var savedItems = UserDefaultsConfig.purchasedCryptoCoins {
+                                        for index in 0..<savedItems.count {
+                                            if savedItems[index].id == coin.id {
+                                                savedItems.remove(at: index)
+                                                break
+                                            }
+                                        }
+                                        UserDefaultsConfig.purchasedCryptoCoins = savedItems
+                                    }
+                                    
+                                    presentationMode.wrappedValue.dismiss()
+                                }
+                                .font(Font.system(size: 22, weight: .heavy))
+                                .foregroundColor(Color(UIColor(red: 0.742, green: 0.04, blue: 0.04, alpha: 1)))
+                                Spacer()
+                            }
+                            .padding(EdgeInsets(.init(top: 50, leading: 0, bottom: 0, trailing: 0)))
+                            
+                        }
+                        
+                        
                         Spacer()
                             .frame(width: .none, height: geometry.size.height / 3, alignment: .center)
+                        
                     }
-                    if showCurrencySelector {
-                        Picker("Currency", selection: $currency) {
-                            ForEach(Currency.allCases) { v in
-                                Text(v.name).tag(v)
-                            }
-                        }
-                        .pickerStyle(MenuPickerStyle())
-                    }
+                    //                    if showCurrencySelector {
+                    //                        Picker("Currency", selection: $currency) {
+                    //                            ForEach(Currency.allCases) { v in
+                    //                                Text(v.name).tag(v)
+                    //                            }
+                    //                        }
+                    //                        .pickerStyle(MenuPickerStyle())
+                    //                    }
                 }
             }
             )
@@ -158,9 +165,67 @@ struct CoinView: View {
     private func prepareView() {
         if let savedItems = UserDefaultsConfig.purchasedCryptoCoins,
            let savedCoin = savedItems.first(where: {$0.id == coin.id}){
-            purchasedPrice = savedCoin.purchasedPrice
-            purchasedAmount = savedCoin.purchasedAmount
+            investmentDetails.purchasedPrice = savedCoin.purchasedPrice
+            investmentDetails.purchasedAmount = savedCoin.purchasedAmount
+            showInsertDeleteButtons = true
+            buttonTitle = "Update Investment"
+        } else {
+            showInsertDeleteButtons = false
+            buttonTitle = "Add Investment"
         }
+    }
+    
+    private func updateInvestments() {
+        if investmentDetails.updatetWithAmount == "" {
+            let purchasedItem = PurchasedCoin(purchasedPrice: investmentDetails.purchasedPrice,
+                                              purchasedAmount: investmentDetails.purchasedAmount,
+                                              id: coin.id,
+                                              symbol: coin.symbol,
+                                              name: coin.name,
+                                              image: coin.image,
+                                              latestPrice: coin.currentPrice,
+                                              lastUpdated: coin.lastUpdated)
+            if var savedItems = UserDefaultsConfig.purchasedCryptoCoins {
+                if !savedItems.contains(where: {$0.id == purchasedItem.id}) {
+                    savedItems.append(purchasedItem)
+                    UserDefaultsConfig.purchasedCryptoCoins = savedItems
+                }
+            } else {
+                UserDefaultsConfig.purchasedCryptoCoins = [purchasedItem]
+            }
+        } else {
+            if var coins = UserDefaultsConfig.purchasedCryptoCoins,
+               var item = coins.first(where: {$0.id == coin.id}) {
+                guard let pAmount = Double(item.purchasedAmount),
+                      let uAmount = Double(investmentDetails.updatetWithAmount.replacingOccurrences(of: ",", with: ".")),
+                      let pPrice = Double(item.purchasedPrice)
+                      
+                else {return}
+                
+                if !isPlusTapped {
+                    item.purchasedAmount = "\(pAmount - uAmount)"
+                } else {
+                    guard let uPrice = Double(investmentDetails.updatedWithPrice.replacingOccurrences(of: ",", with: ".")) else {return}
+                    item.purchasedAmount = "\(pAmount + uAmount)"
+                    let total = (pAmount * pPrice) + (uAmount * uPrice)
+                    let average = total / (pAmount + uAmount)
+                    item.purchasedPrice = "\(average)"
+                }
+                
+                for index in 0..<coins.count {
+                    if coins[index].id == coin.id {
+                        coins[index] = item
+                        break
+                    }
+                }
+                
+                UserDefaultsConfig.purchasedCryptoCoins = coins
+                
+            }
+        }
+        
+        
+        presentationMode.wrappedValue.dismiss()
     }
     
 }
@@ -195,6 +260,65 @@ struct CoinView_Previews: PreviewProvider {
             roi: nil,
             lastUpdated: "String")
         
-        CoinView(coin: data, purchasedPrice: "34,850.5", purchasedAmount: "0.04", coinIcon: Image(systemName: "creditcard.circle"))
+        CoinView(coin: data, coinIcon: Image(systemName: "creditcard.circle"))
+    }
+}
+
+struct InformationView: View {
+    
+    @ObservedObject var investmentDetails: InvestmentDetails
+    
+    let isMainInfo: Bool
+    init(isMain: Bool, details: InvestmentDetails) {
+        self.isMainInfo = isMain
+        self.investmentDetails = details
+    }
+    
+    var body: some View {
+        VStack(spacing: 8) {
+            HStack {
+                Text(isMainInfo ? "Purchased at: " : "Price")
+                    .padding(.leading)
+                Spacer()
+                TextField(isMainInfo ? "Enter Purchased Price $" : "Enter Price", text: isMainInfo ? $investmentDetails.purchasedPrice : $investmentDetails.updatedWithPrice)
+                    .keyboardType(.decimalPad)
+                    .multilineTextAlignment(.trailing)
+                    .keyboardType(.decimalPad)
+                    .minimumScaleFactor(0.5)
+                    .padding(.trailing)
+                    .introspectTextField { (textField) in
+                        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: textField.frame.size.width, height: 44))
+                        let flexButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+                        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(textField.doneButtonTapped(button:)))
+                        doneButton.tintColor = .systemPink
+                        toolBar.items = [flexButton, doneButton]
+                        toolBar.setItems([flexButton, doneButton], animated: true)
+                        textField.inputAccessoryView = toolBar
+                    }
+            }
+            
+            HStack {
+                Text(isMainInfo ? "Purchased Amount: " : "Amount")
+                    .padding(.leading)
+                Spacer()
+                
+                TextField(isMainInfo ? "Enter Purchased Amount" : "Enter Amount", text: isMainInfo ? $investmentDetails.purchasedAmount : $investmentDetails.updatetWithAmount)
+                    .minimumScaleFactor(0.5)
+                    .keyboardType(.decimalPad)
+                    .multilineTextAlignment(.trailing)
+                    .keyboardType(.decimalPad)
+                    .padding(.trailing)
+                    .introspectTextField { (textField) in
+                        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: textField.frame.size.width, height: 44))
+                        let flexButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+                        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(textField.doneButtonTapped(button:)))
+                        doneButton.tintColor = .systemPink
+                        toolBar.items = [flexButton, doneButton]
+                        toolBar.setItems([flexButton, doneButton], animated: true)
+                        textField.inputAccessoryView = toolBar
+                    }
+                
+            }
+        }
     }
 }
