@@ -22,6 +22,15 @@ struct CoinView: View {
     
     var coinIcon: Image
     
+//    init() {
+//
+//              UINavigationBar.appearance().setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+//              UINavigationBar.appearance().shadowImage = UIImage()
+//              UINavigationBar.appearance().isTranslucent = true
+//              UINavigationBar.appearance().tintColor = .clear
+//              UINavigationBar.appearance().backgroundColor = .clear
+//         }
+    
     var body: some View {
         GeometryReader { geometry in
             ZStack {
@@ -168,6 +177,19 @@ struct CoinView: View {
                 }
             }
         }
+        .navigationBarTitle(Text(coin.name), displayMode: .inline)
+        .font(.subheadline)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading:
+            Image("back")
+                .foregroundColor(.blue)
+                .onTapGesture {
+                    self.presentationMode.wrappedValue.dismiss()
+            }
+        )
+        .onAppear(perform: {
+            
+        })
         //        .onTapGesture {
         //            hideKeyboard()
         //                }
@@ -204,6 +226,7 @@ struct CoinView_Previews: PreviewProvider {
             atlDate: "String",
             roi: nil,
             lastUpdated: "String")
+        
         CoinView(coin: data, purchasedPrice: "34,850.5", purchasedAmount: "0.04", coinIcon: Image(systemName: "creditcard.circle"))
     }
 }

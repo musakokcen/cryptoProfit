@@ -233,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				4D8E660E25C72A720051C656 /* UserDefaultConfig.swift */,
+				4D908E3625B8E8FF001E501C /* Currency.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -276,7 +277,6 @@
 			isa = PBXGroup;
 			children = (
 				4D908DE925B70D81001E501C /* CoinView.swift */,
-				4D908E3625B8E8FF001E501C /* Currency.swift */,
 			);
 			path = CoinView;
 			sourceTree = "<group>";
@@ -692,6 +692,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"cryptoProfit/Preview Content\"";
+				DEVELOPMENT_TEAM = Q58BT3DDCP;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = cryptoProfit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -699,7 +700,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.SampleProject.musakokcen.cryptoProfit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.musakokcen.cryptoProfit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -714,6 +715,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"cryptoProfit/Preview Content\"";
+				DEVELOPMENT_TEAM = Q58BT3DDCP;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = cryptoProfit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -721,7 +723,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.SampleProject.musakokcen.cryptoProfit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.musakokcen.cryptoProfit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

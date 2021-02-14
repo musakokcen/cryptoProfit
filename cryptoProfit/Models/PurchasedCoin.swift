@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PurchasedCoin: Codable, Equatable {
+struct PurchasedCoin: Codable, Equatable, Hashable {
     let purchasedPrice: String
     let purchasedAmount: String
     let id, symbol, name: String

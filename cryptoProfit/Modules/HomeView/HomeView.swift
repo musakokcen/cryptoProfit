@@ -19,6 +19,13 @@ struct HomeView: View {
     
     private var fetchedCoinListPage = 1
     
+    init() {
+        UINavigationBar.appearance().barTintColor = .clear
+        UINavigationBar.appearance().backgroundColor = .clear
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        UINavigationBar.appearance().shadowImage = UIImage()
+    }
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -44,10 +51,6 @@ struct HomeView: View {
                                     InvestmentListItem(coin: coin)
                                 }
                             }
-                            .onDelete(perform: { indexSet in
-                                self.investmentList?.remove(atOffsets: indexSet)
-                                UserDefaultsConfig.purchasedCryptoCoins = investmentList
-                            })
                         }
                     }
                 }
@@ -57,7 +60,7 @@ struct HomeView: View {
                     investmentList = UserDefaultsConfig.purchasedCryptoCoins
                 }
             })
-            .navigationTitle("Crypto Profit")
+            .navigationBarTitle("Crypto Profit", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                 }
