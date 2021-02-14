@@ -18,18 +18,8 @@ struct CoinView: View {
     @State private var purchasedDate = Date()
     @State var currency: Currency = Currency.USD
     @State var showCurrencySelector: Bool = false
-   
     
     var coinIcon: Image
-    
-//    init() {
-//
-//              UINavigationBar.appearance().setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-//              UINavigationBar.appearance().shadowImage = UIImage()
-//              UINavigationBar.appearance().isTranslucent = true
-//              UINavigationBar.appearance().tintColor = .clear
-//              UINavigationBar.appearance().backgroundColor = .clear
-//         }
     
     var body: some View {
         GeometryReader { geometry in
@@ -82,40 +72,8 @@ struct CoinView: View {
                                 toolBar.setItems([flexButton, doneButton], animated: true)
                                 textField.inputAccessoryView = toolBar
                             }
-//                        Picker(currency.name, selection: $currency) {
-//                            ForEach(Currency.allCases) { v in
-//                                Text(v.name).tag(v)
-//                            }
-//                        }
-//                        .pickerStyle(MenuPickerStyle())
-//                        .padding(.trailing)
-//                        .foregroundColor(.black)
                     }
-                    /*
-                    Text("*If you enter the purchase price, you can track the actual profit.")
-                        .font(Font.system(size: 12, weight: .light, design: .serif))                        .minimumScaleFactor(0.4)
-                        .padding(EdgeInsets(.init(top: 0, leading: 30, bottom: 0, trailing: 4)))
-                        .lineLimit(1)
                     
-                    DatePicker(selection: $purchasedDate, in: ...Date(), displayedComponents: [.hourAndMinute, .date]) {
-                        Text("Purchased Date: ")
-                            .padding(.leading)
-                    }
-                    .foregroundColor(.black)
-                    .accentColor(.black)
-                    .padding(EdgeInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 10)))
-                    //                    Spacer()
-                    HStack {
-                        Text("*retrives the average price of the date.")
-                            //                        .font(Font.headline.weight(.light))
-                            .font(Font.system(size: 12, weight: .light, design: .serif))
-                            .multilineTextAlignment(.leading)
-                            .minimumScaleFactor(0.4)
-                            .padding(EdgeInsets(.init(top: 0, leading: 30, bottom: 0, trailing: 4)))
-                            .lineLimit(1)
-                        Spacer()
-                    }
-                    */
                     HStack {
                         Text("Purchased amount: ")
                             .padding(.leading)
@@ -143,13 +101,13 @@ struct CoinView: View {
                         Spacer()
                         Button("Start Tracking") {
                             let purchasedItem = PurchasedCoin(purchasedPrice: purchasedPrice,
-                                purchasedAmount: purchasedAmount,
-                                id: coin.id,
-                                symbol: coin.symbol,
-                                name: coin.name,
-                                image: coin.image,
-                                latestPrice: coin.currentPrice,
-                                lastUpdated: coin.lastUpdated)
+                                                              purchasedAmount: purchasedAmount,
+                                                              id: coin.id,
+                                                              symbol: coin.symbol,
+                                                              name: coin.name,
+                                                              image: coin.image,
+                                                              latestPrice: coin.currentPrice,
+                                                              lastUpdated: coin.lastUpdated)
                             if var savedItems = UserDefaultsConfig.purchasedCryptoCoins {
                                 savedItems.append(purchasedItem)
                                 UserDefaultsConfig.purchasedCryptoCoins = savedItems
@@ -181,18 +139,15 @@ struct CoinView: View {
         .font(.subheadline)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading:
-            Image("back")
-                .foregroundColor(.blue)
-                .onTapGesture {
-                    self.presentationMode.wrappedValue.dismiss()
-            }
+                                Image("back")
+                                .foregroundColor(.blue)
+                                .onTapGesture {
+                                    self.presentationMode.wrappedValue.dismiss()
+                                }
         )
         .onAppear(perform: {
             
         })
-        //        .onTapGesture {
-        //            hideKeyboard()
-        //                }
     }
     
 }
