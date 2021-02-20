@@ -22,12 +22,10 @@ struct InformationView: View {
             HStack {
                 Text(isMainInfo ? "Purchased at: " : "Price")
                     .padding(.leading)
-                    .font(.system(size: 24.0, weight: .regular))
                     .fixedSize()
 
                 Spacer()
                 TextField(isMainInfo ? "Enter Price $" : "Enter Price $", text: isMainInfo ? $investmentDetails.purchasedPrice : $investmentDetails.updatedWithPrice)
-                    .font(.system(size: 24.0, weight: .regular))
                     .keyboardType(.decimalPad)
                     .multilineTextAlignment(.trailing)
                     .keyboardType(.decimalPad)
@@ -47,12 +45,10 @@ struct InformationView: View {
             HStack {
                 Text(isMainInfo ? "Purchased Amount: " : "Amount")
                     .padding(.leading)
-                    .font(.system(size: 24.0, weight: .regular))
                     .fixedSize()
                 Spacer()
                 
                 TextField(isMainInfo ? "Enter Amount" : "Enter Amount", text: isMainInfo ? $investmentDetails.purchasedAmount : $investmentDetails.updatedWithAmount)
-                    .font(.system(size: 24.0, weight: .regular))
                     .minimumScaleFactor(0.5)
                     .keyboardType(.decimalPad)
                     .multilineTextAlignment(.trailing)
@@ -70,6 +66,7 @@ struct InformationView: View {
                 
             }
         }
+        .font(Font.custom("Quantico-Regular", size: 24))
     }
 }
 

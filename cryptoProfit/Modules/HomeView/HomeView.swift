@@ -27,6 +27,7 @@ struct HomeView: View {
         UINavigationBar.appearance().backgroundColor = .clear
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().titleTextAttributes = [.font : UIFont(name: "Quantico-Regular", size: 36)!]
     }
     
     var body: some View {
@@ -83,8 +84,8 @@ struct HomeView: View {
                         Button("Load More") {
                             fetchCoinList()
                         }
-                        .font(Font.system(size: 22, weight: .heavy))
                         .foregroundColor(Color(UIColor(named: "whiteColor")!))
+                        .font(Font.custom("Quantico-Regular", size: 20))
                     } else {
                         if let investmentList = investmentList {
                             ForEach(investmentList, id: \.id) { coin in
@@ -97,6 +98,7 @@ struct HomeView: View {
                 }
                 .resignKeyboardOnDragGesture()
             }
+            .font(Font.custom("Quantico-Regular", size: 16))
             .onAppear(perform: {
                 if investmentList != UserDefaultsConfig.purchasedCryptoCoins {
                     investmentList = UserDefaultsConfig.purchasedCryptoCoins

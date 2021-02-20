@@ -45,7 +45,7 @@ struct CoinView: View {
                         
                         VStack(spacing: 8) {
                             Text("\(coin.currentPrice, specifier: "%.2f")$")
-                                .font(Font.headline.weight(.bold))
+//                                .font(Font.headline.weight(.bold))
                                 .textCase(.uppercase)
                                 .minimumScaleFactor(0.5)
                                 .frame(width: .none, height: .none, alignment: .leading)
@@ -95,7 +95,6 @@ struct CoinView: View {
                                 Button(buttonTitle) {
                                     updateInvestments()
                                 }
-                                .font(Font.system(size: 22, weight: .heavy))
                                 .foregroundColor(Color(UIColor(red: 0.361, green: 0.725, blue: 0.071, alpha: 1)))
                                 Spacer()
                             }
@@ -120,7 +119,6 @@ struct CoinView: View {
                                     
                                     presentationMode.wrappedValue.dismiss()
                                 }
-                                .font(Font.system(size: 22, weight: .heavy))
                                 .foregroundColor(Color(UIColor(red: 0.742, green: 0.04, blue: 0.04, alpha: 1)))
                                 Spacer()
                             }
@@ -133,12 +131,13 @@ struct CoinView: View {
                             .frame(width: .none, height: geometry.size.height / 3, alignment: .center)
                         
                     }
+            .font(Font.custom("Quantico-Regular", size: 16))
             .onAppear(perform: {
                 IQKeyboardManager.shared.enable = true
             })
         }
         .navigationBarTitle(Text(coin.name), displayMode: .inline)
-        .font(.subheadline)
+//        .font(.subheadline)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading:
                                 Image("back")

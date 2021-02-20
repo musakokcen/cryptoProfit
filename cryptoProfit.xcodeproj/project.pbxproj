@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0EF4168A713E56287FFD7F75 /* Pods_cryptoProfitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD1FE5966A655ED41B8A96E /* Pods_cryptoProfitTests.framework */; };
+		4D39D95325E17668009C7C9F /* quantico.bold-italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D39D95025E17623009C7C9F /* quantico.bold-italic.ttf */; };
+		4D39D95725E1766B009C7C9F /* quantico.bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D39D95125E17623009C7C9F /* quantico.bold.ttf */; };
+		4D39D95825E1766E009C7C9F /* quantico.italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D39D95225E17624009C7C9F /* quantico.italic.ttf */; };
+		4D39D95C25E17671009C7C9F /* quantico.regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D39D94F25E17622009C7C9F /* quantico.regular.ttf */; };
 		4D4D967325E1441F00BFA502 /* InformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4D967225E1441F00BFA502 /* InformationView.swift */; };
 		4D63A00825C6D38400C849B0 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D63A00725C6D38400C849B0 /* HomeView.swift */; };
 		4D63A00D25C6D4FC00C849B0 /* CoinMarket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D63A00C25C6D4FC00C849B0 /* CoinMarket.swift */; };
@@ -54,6 +58,10 @@
 		3A987BF46658C79DEA251085 /* Pods-cryptoProfit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cryptoProfit.debug.xcconfig"; path = "Target Support Files/Pods-cryptoProfit/Pods-cryptoProfit.debug.xcconfig"; sourceTree = "<group>"; };
 		3B121FFBD909C960AE231C73 /* Pods_cryptoProfit_cryptoProfitUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cryptoProfit_cryptoProfitUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		48E31CBDCAE5DEDF16C418E4 /* Pods-cryptoProfit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cryptoProfit.release.xcconfig"; path = "Target Support Files/Pods-cryptoProfit/Pods-cryptoProfit.release.xcconfig"; sourceTree = "<group>"; };
+		4D39D94F25E17622009C7C9F /* quantico.regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = quantico.regular.ttf; sourceTree = "<group>"; };
+		4D39D95025E17623009C7C9F /* quantico.bold-italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "quantico.bold-italic.ttf"; sourceTree = "<group>"; };
+		4D39D95125E17623009C7C9F /* quantico.bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = quantico.bold.ttf; sourceTree = "<group>"; };
+		4D39D95225E17624009C7C9F /* quantico.italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = quantico.italic.ttf; sourceTree = "<group>"; };
 		4D4D967225E1441F00BFA502 /* InformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationView.swift; sourceTree = "<group>"; };
 		4D63A00725C6D38400C849B0 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		4D63A00C25C6D4FC00C849B0 /* CoinMarket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinMarket.swift; sourceTree = "<group>"; };
@@ -128,6 +136,17 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		4D39D94E25E175F3009C7C9F /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				4D39D95025E17623009C7C9F /* quantico.bold-italic.ttf */,
+				4D39D95125E17623009C7C9F /* quantico.bold.ttf */,
+				4D39D95225E17624009C7C9F /* quantico.italic.ttf */,
+				4D39D94F25E17622009C7C9F /* quantico.regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		4D4C2593920DCE116D79D36D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +209,7 @@
 		4D903C9D25B59C4700B9C251 /* cryptoProfit */ = {
 			isa = PBXGroup;
 			children = (
+				4D39D94E25E175F3009C7C9F /* Fonts */,
 				4D903C9E25B59C4700B9C251 /* cryptoProfitApp.swift */,
 				4D903CA225B59C4B00B9C251 /* Assets.xcassets */,
 				4D903CA725B59C4B00B9C251 /* Info.plist */,
@@ -400,8 +420,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D39D95725E1766B009C7C9F /* quantico.bold.ttf in Resources */,
+				4D39D95825E1766E009C7C9F /* quantico.italic.ttf in Resources */,
 				4D903CA625B59C4B00B9C251 /* Preview Assets.xcassets in Resources */,
 				4D903CA325B59C4B00B9C251 /* Assets.xcassets in Resources */,
+				4D39D95C25E17671009C7C9F /* quantico.regular.ttf in Resources */,
+				4D39D95325E17668009C7C9F /* quantico.bold-italic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
