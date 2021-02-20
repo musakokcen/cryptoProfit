@@ -7,12 +7,13 @@
 
 import SwiftUI
 import Introspect
+import IQKeyboardManagerSwift
 
 class InvestmentDetails: ObservableObject {
     @Published var purchasedPrice: String = ""
     @Published var purchasedAmount: String = ""
     @Published var updatedWithPrice: String = ""
-    @Published var updatetWithAmount: String = ""
+    @Published var updatedWithAmount: String = ""
 }
 
 struct CoinView: View {
@@ -29,17 +30,14 @@ struct CoinView: View {
     @State var isAdditionalInfoViewHidden: Bool = true
     @State var buttonTitle: String = "Add Investment"
     @State var isPlusTapped: Bool = false
+    @State var bottomHeight: CGFloat = 0
     
     var coinIcon: Image
     
     var body: some View {
         GeometryReader { geometry in
-            ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false, content:  {
-                ZStack {
-                    VStack(spacing: 24) {
-                        
+            VStack(spacing: 24) {
                         Spacer().frame(width: .none, height: 0, alignment: .center)
-                        
                         coinIcon
                             .resizable()
                             .aspectRatio(contentMode: .fit)
@@ -98,7 +96,7 @@ struct CoinView: View {
                                     updateInvestments()
                                 }
                                 .font(Font.system(size: 22, weight: .heavy))
-                                .foregroundColor(Color(UIColor(red: 0.36, green: 0.725, blue: 0.072, alpha: 1)))
+                                .foregroundColor(Color(UIColor(red: 0.361, green: 0.725, blue: 0.071, alpha: 1)))
                                 Spacer()
                             }
                             .padding(EdgeInsets(.init(top: 50, leading: 0, bottom: 0, trailing: 0)))
@@ -135,17 +133,9 @@ struct CoinView: View {
                             .frame(width: .none, height: geometry.size.height / 3, alignment: .center)
                         
                     }
-                    //                    if showCurrencySelector {
-                    //                        Picker("Currency", selection: $currency) {
-                    //                            ForEach(Currency.allCases) { v in
-                    //                                Text(v.name).tag(v)
-                    //                            }
-                    //                        }
-                    //                        .pickerStyle(MenuPickerStyle())
-                    //                    }
-                }
-            }
-            )
+            .onAppear(perform: {
+                IQKeyboardManager.shared.enable = true
+            })
         }
         .navigationBarTitle(Text(coin.name), displayMode: .inline)
         .font(.subheadline)
@@ -176,9 +166,9 @@ struct CoinView: View {
     }
     
     private func updateInvestments() {
-        if investmentDetails.updatetWithAmount == "" {
-            let purchasedItem = PurchasedCoin(purchasedPrice: investmentDetails.purchasedPrice,
-                                              purchasedAmount: investmentDetails.purchasedAmount,
+        if investmentDetails.updatedWithAmount == "" {
+            let purchasedItem = PurchasedCoin(purchasedPrice: investmentDetails.purchasedPrice.replacingOccurrences(of: ",", with: "."),
+                                              purchasedAmount: investmentDetails.purchasedAmount.replacingOccurrences(of: ",", with: "."),
                                               id: coin.id,
                                               symbol: coin.symbol,
                                               name: coin.name,
@@ -197,7 +187,7 @@ struct CoinView: View {
             if var coins = UserDefaultsConfig.purchasedCryptoCoins,
                var item = coins.first(where: {$0.id == coin.id}) {
                 guard let pAmount = Double(item.purchasedAmount),
-                      let uAmount = Double(investmentDetails.updatetWithAmount.replacingOccurrences(of: ",", with: ".")),
+                      let uAmount = Double(investmentDetails.updatedWithAmount.replacingOccurrences(of: ",", with: ".")),
                       let pPrice = Double(item.purchasedPrice)
                       
                 else {return}
@@ -224,12 +214,11 @@ struct CoinView: View {
             }
         }
         
-        
         presentationMode.wrappedValue.dismiss()
     }
     
 }
-
+/*
 struct CoinView_Previews: PreviewProvider {
     static var previews: some View {
         let data = CoinMarketData(
@@ -263,62 +252,4 @@ struct CoinView_Previews: PreviewProvider {
         CoinView(coin: data, coinIcon: Image(systemName: "creditcard.circle"))
     }
 }
-
-struct InformationView: View {
-    
-    @ObservedObject var investmentDetails: InvestmentDetails
-    
-    let isMainInfo: Bool
-    init(isMain: Bool, details: InvestmentDetails) {
-        self.isMainInfo = isMain
-        self.investmentDetails = details
-    }
-    
-    var body: some View {
-        VStack(spacing: 8) {
-            HStack {
-                Text(isMainInfo ? "Purchased at: " : "Price")
-                    .padding(.leading)
-                Spacer()
-                TextField(isMainInfo ? "Enter Purchased Price $" : "Enter Price", text: isMainInfo ? $investmentDetails.purchasedPrice : $investmentDetails.updatedWithPrice)
-                    .keyboardType(.decimalPad)
-                    .multilineTextAlignment(.trailing)
-                    .keyboardType(.decimalPad)
-                    .minimumScaleFactor(0.5)
-                    .padding(.trailing)
-                    .introspectTextField { (textField) in
-                        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: textField.frame.size.width, height: 44))
-                        let flexButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-                        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(textField.doneButtonTapped(button:)))
-                        doneButton.tintColor = .systemPink
-                        toolBar.items = [flexButton, doneButton]
-                        toolBar.setItems([flexButton, doneButton], animated: true)
-                        textField.inputAccessoryView = toolBar
-                    }
-            }
-            
-            HStack {
-                Text(isMainInfo ? "Purchased Amount: " : "Amount")
-                    .padding(.leading)
-                Spacer()
-                
-                TextField(isMainInfo ? "Enter Purchased Amount" : "Enter Amount", text: isMainInfo ? $investmentDetails.purchasedAmount : $investmentDetails.updatetWithAmount)
-                    .minimumScaleFactor(0.5)
-                    .keyboardType(.decimalPad)
-                    .multilineTextAlignment(.trailing)
-                    .keyboardType(.decimalPad)
-                    .padding(.trailing)
-                    .introspectTextField { (textField) in
-                        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: textField.frame.size.width, height: 44))
-                        let flexButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-                        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(textField.doneButtonTapped(button:)))
-                        doneButton.tintColor = .systemPink
-                        toolBar.items = [flexButton, doneButton]
-                        toolBar.setItems([flexButton, doneButton], animated: true)
-                        textField.inputAccessoryView = toolBar
-                    }
-                
-            }
-        }
-    }
-}
+*/

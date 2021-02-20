@@ -82,6 +82,7 @@ PODS:
   - GoogleUtilities/UserDefaults (7.2.0):
     - GoogleUtilities/Logger
   - Introspect (0.1.2)
+  - IQKeyboardManagerSwift (6.5.6)
   - Kingfisher (6.0.1)
   - MBProgressHUD (1.2.0)
   - nanopb (2.30907.0):
@@ -103,6 +104,7 @@ DEPENDENCIES:
   - Firebase/Crashlytics
   - Firebase/RemoteConfig
   - Introspect
+  - IQKeyboardManagerSwift
   - Kingfisher (~> 6.0)
   - MBProgressHUD
   - Purchases
@@ -125,6 +127,7 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleUtilities
     - Introspect
+    - IQKeyboardManagerSwift
     - Kingfisher
     - MBProgressHUD
     - nanopb
@@ -149,6 +152,7 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 1024b1a4dfbd7a0e92cb20d7e0a6f1fb66b449a4
   GoogleUtilities: d866834472f1324d080496bc67ab3ce5d0d46027
   Introspect: 85a29d2c5ee4d3d15469ad0b75fd8839f3e72674
+  IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   Kingfisher: adde87a4f74f6a3845395769354efff593581740
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   nanopb: 59221d7f958fb711001e6a449489542d92ae113e
@@ -157,6 +161,6 @@ SPEC CHECKSUMS:
   PurchasesCoreSwift: db1370f94aab8c9bc64fcf0bafd767d3504a5f95
   SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
 
-PODFILE CHECKSUM: 6eb7560048ffdc3d56672484ca548385aa9a3c0a
+PODFILE CHECKSUM: 7c8455a81ab3247f44396475320e4165ae8ca7c5
 
 COCOAPODS: 1.10.1
