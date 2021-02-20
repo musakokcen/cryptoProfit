@@ -17,8 +17,11 @@ struct HomeView: View {
     
     @State private var selectedView = (UserDefaultsConfig.purchasedCryptoCoins?.count ?? 0) > 0 ? 1 : 0
     
-    private var fetchedCoinListPage = 1
+    @State private var fetchedCoinListPage = 1
     
+    @State private var searchText = ""
+    @State private var showCancelButton: Bool = false
+
     init() {
         UINavigationBar.appearance().barTintColor = .clear
         UINavigationBar.appearance().backgroundColor = .clear
@@ -41,9 +44,47 @@ struct HomeView: View {
                         Spacer()
                     }
                     if selectedView == 0 {
-                        ForEach(coinList, id: \.id) { coin in
+                        HStack {
+                            HStack {
+                                Image(systemName: "magnifyingglass")
+
+                                TextField("search", text: $searchText, onEditingChanged: { isEditing in
+                                    self.showCancelButton = true
+                                }, onCommit: {
+                                    print("onCommit")
+                                }).foregroundColor(.primary)
+
+                                Button(action: {
+                                    self.searchText = ""
+                                }) {
+                                    Image(systemName: "xmark.circle.fill").opacity(searchText == "" ? 0 : 1)
+                                }
+                            }
+                            .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
+                            .foregroundColor(.secondary)
+                            .background(Color(.secondarySystemBackground))
+                            .cornerRadius(10.0)
+
+                            if showCancelButton  {
+                                Button("Cancel") {
+                                        UIApplication.shared.endEditing(true) // this must be placed before the other commands here
+                                        self.searchText = ""
+                                        self.showCancelButton = false
+                                }
+                                .foregroundColor(Color(.systemBlue))
+                            }
+                        }
+                        .padding(.horizontal)
+                        .navigationBarHidden(showCancelButton) // .animation(.default) // animation does not work properly
+                        ForEach(coinList.filter{$0.name.contains(searchText) || searchText == ""}, id: \.id) { coin in
                             CoinListItem(coin: coin)
                         }
+                        Spacer()
+                        Button("Load More") {
+                            fetchCoinList()
+                        }
+                        .font(Font.system(size: 22, weight: .heavy))
+                        .foregroundColor(Color(UIColor(named: "whiteColor")!))
                     } else {
                         if let investmentList = investmentList {
                             ForEach(investmentList, id: \.id) { coin in
@@ -54,6 +95,7 @@ struct HomeView: View {
                         }
                     }
                 }
+                .resignKeyboardOnDragGesture()
             }
             .onAppear(perform: {
                 if investmentList != UserDefaultsConfig.purchasedCryptoCoins {
@@ -65,6 +107,7 @@ struct HomeView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                 }
             }
+            
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .onAppear(perform: {
@@ -79,11 +122,13 @@ struct HomeView: View {
                 case .success(let data):
                     let sortedData = data.sorted{$0.marketCap > $1.marketCap }
                     coinList.append(contentsOf: sortedData)
-                    selectedView = UserDefaultsConfig.purchasedCryptoCoins == nil ? 0 : 1
+                    
                 case .failure(let err):
                     print(err)
                 }
             }
+            
+            self.fetchedCoinListPage += 1
         }
     }
 }
@@ -91,5 +136,31 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+    }
+}
+
+
+// search bar extensions
+extension UIApplication {
+    func endEditing(_ force: Bool) {
+        self.windows
+            .filter{$0.isKeyWindow}
+            .first?
+            .endEditing(force)
+    }
+}
+
+struct ResignKeyboardOnDragGesture: ViewModifier {
+    var gesture = DragGesture().onChanged{_ in
+        UIApplication.shared.endEditing(true)
+    }
+    func body(content: Content) -> some View {
+        content.gesture(gesture)
+    }
+}
+
+extension View {
+    func resignKeyboardOnDragGesture() -> some View {
+        return modifier(ResignKeyboardOnDragGesture())
     }
 }
