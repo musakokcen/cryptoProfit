@@ -12,6 +12,18 @@
 		4D39D95725E1766B009C7C9F /* quantico.bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D39D95125E17623009C7C9F /* quantico.bold.ttf */; };
 		4D39D95825E1766E009C7C9F /* quantico.italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D39D95225E17624009C7C9F /* quantico.italic.ttf */; };
 		4D39D95C25E17671009C7C9F /* quantico.regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D39D94F25E17622009C7C9F /* quantico.regular.ttf */; };
+		4D39D96625E18A8E009C7C9F /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D39D96525E18A8E009C7C9F /* WidgetKit.framework */; };
+		4D39D96825E18A8E009C7C9F /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D39D96725E18A8E009C7C9F /* SwiftUI.framework */; };
+		4D39D96B25E18A8E009C7C9F /* CryptoWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D39D96A25E18A8E009C7C9F /* CryptoWidget.swift */; };
+		4D39D96D25E18A90009C7C9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D39D96C25E18A90009C7C9F /* Assets.xcassets */; };
+		4D39D97125E18A90009C7C9F /* CryptoWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4D39D96425E18A8E009C7C9F /* CryptoWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4D39D97A25E18C0B009C7C9F /* CoinMarket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D63A00C25C6D4FC00C849B0 /* CoinMarket.swift */; };
+		4D39D97F25E18C11009C7C9F /* PurchasedCoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8E660925C729CD0051C656 /* PurchasedCoin.swift */; };
+		4D39D98425E18C99009C7C9F /* UserDefaultConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8E660E25C72A720051C656 /* UserDefaultConfig.swift */; };
+		4D39D98925E1B496009C7C9F /* quantico.bold-italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D39D95025E17623009C7C9F /* quantico.bold-italic.ttf */; };
+		4D39D98E25E1B499009C7C9F /* quantico.bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D39D95125E17623009C7C9F /* quantico.bold.ttf */; };
+		4D39D98F25E1B49B009C7C9F /* quantico.italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D39D95225E17624009C7C9F /* quantico.italic.ttf */; };
+		4D39D99425E1B49E009C7C9F /* quantico.regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D39D94F25E17622009C7C9F /* quantico.regular.ttf */; };
 		4D4D967325E1441F00BFA502 /* InformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4D967225E1441F00BFA502 /* InformationView.swift */; };
 		4D63A00825C6D38400C849B0 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D63A00725C6D38400C849B0 /* HomeView.swift */; };
 		4D63A00D25C6D4FC00C849B0 /* CoinMarket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D63A00C25C6D4FC00C849B0 /* CoinMarket.swift */; };
@@ -37,6 +49,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		4D39D96F25E18A90009C7C9F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4D903C9325B59C4700B9C251 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4D39D96325E18A8E009C7C9F;
+			remoteInfo = CryptoWidgetExtension;
+		};
 		4D903CAD25B59C4B00B9C251 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4D903C9325B59C4700B9C251 /* Project object */;
@@ -53,6 +72,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		4D39D97225E18A90009C7C9F /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				4D39D97125E18A90009C7C9F /* CryptoWidgetExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		37765E6141A4F937E3F39941 /* Pods-cryptoProfitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cryptoProfitTests.release.xcconfig"; path = "Target Support Files/Pods-cryptoProfitTests/Pods-cryptoProfitTests.release.xcconfig"; sourceTree = "<group>"; };
 		3A987BF46658C79DEA251085 /* Pods-cryptoProfit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cryptoProfit.debug.xcconfig"; path = "Target Support Files/Pods-cryptoProfit/Pods-cryptoProfit.debug.xcconfig"; sourceTree = "<group>"; };
@@ -62,6 +95,12 @@
 		4D39D95025E17623009C7C9F /* quantico.bold-italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "quantico.bold-italic.ttf"; sourceTree = "<group>"; };
 		4D39D95125E17623009C7C9F /* quantico.bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = quantico.bold.ttf; sourceTree = "<group>"; };
 		4D39D95225E17624009C7C9F /* quantico.italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = quantico.italic.ttf; sourceTree = "<group>"; };
+		4D39D96425E18A8E009C7C9F /* CryptoWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CryptoWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D39D96525E18A8E009C7C9F /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		4D39D96725E18A8E009C7C9F /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		4D39D96A25E18A8E009C7C9F /* CryptoWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoWidget.swift; sourceTree = "<group>"; };
+		4D39D96C25E18A90009C7C9F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4D39D96E25E18A90009C7C9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D4D967225E1441F00BFA502 /* InformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationView.swift; sourceTree = "<group>"; };
 		4D63A00725C6D38400C849B0 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		4D63A00C25C6D4FC00C849B0 /* CoinMarket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinMarket.swift; sourceTree = "<group>"; };
@@ -96,6 +135,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4D39D96125E18A8E009C7C9F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D39D96825E18A8E009C7C9F /* SwiftUI.framework in Frameworks */,
+				4D39D96625E18A8E009C7C9F /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4D903C9825B59C4700B9C251 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -147,12 +195,24 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		4D39D96925E18A8E009C7C9F /* CryptoWidget */ = {
+			isa = PBXGroup;
+			children = (
+				4D39D96A25E18A8E009C7C9F /* CryptoWidget.swift */,
+				4D39D96C25E18A90009C7C9F /* Assets.xcassets */,
+				4D39D96E25E18A90009C7C9F /* Info.plist */,
+			);
+			path = CryptoWidget;
+			sourceTree = "<group>";
+		};
 		4D4C2593920DCE116D79D36D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				D3064B54BB4E4827793AA5AB /* Pods_cryptoProfit.framework */,
 				3B121FFBD909C960AE231C73 /* Pods_cryptoProfit_cryptoProfitUITests.framework */,
 				FDD1FE5966A655ED41B8A96E /* Pods_cryptoProfitTests.framework */,
+				4D39D96525E18A8E009C7C9F /* WidgetKit.framework */,
+				4D39D96725E18A8E009C7C9F /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -190,6 +250,7 @@
 				4D903C9D25B59C4700B9C251 /* cryptoProfit */,
 				4D903CAF25B59C4B00B9C251 /* cryptoProfitTests */,
 				4D903CBA25B59C4B00B9C251 /* cryptoProfitUITests */,
+				4D39D96925E18A8E009C7C9F /* CryptoWidget */,
 				4D903C9C25B59C4700B9C251 /* Products */,
 				3E1253E28F0B730D9032D5CB /* Pods */,
 				4D4C2593920DCE116D79D36D /* Frameworks */,
@@ -202,6 +263,7 @@
 				4D903C9B25B59C4700B9C251 /* cryptoProfit.app */,
 				4D903CAC25B59C4B00B9C251 /* cryptoProfitTests.xctest */,
 				4D903CB725B59C4B00B9C251 /* cryptoProfitUITests.xctest */,
+				4D39D96425E18A8E009C7C9F /* CryptoWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -315,6 +377,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		4D39D96325E18A8E009C7C9F /* CryptoWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D39D97525E18A90009C7C9F /* Build configuration list for PBXNativeTarget "CryptoWidgetExtension" */;
+			buildPhases = (
+				4D39D96025E18A8E009C7C9F /* Sources */,
+				4D39D96125E18A8E009C7C9F /* Frameworks */,
+				4D39D96225E18A8E009C7C9F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CryptoWidgetExtension;
+			productName = CryptoWidgetExtension;
+			productReference = 4D39D96425E18A8E009C7C9F /* CryptoWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		4D903C9A25B59C4700B9C251 /* cryptoProfit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4D903CC025B59C4B00B9C251 /* Build configuration list for PBXNativeTarget "cryptoProfit" */;
@@ -324,10 +403,12 @@
 				4D903C9825B59C4700B9C251 /* Frameworks */,
 				4D903C9925B59C4700B9C251 /* Resources */,
 				894327546FDC4436B56C0523 /* [CP] Embed Pods Frameworks */,
+				4D39D97225E18A90009C7C9F /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				4D39D97025E18A90009C7C9F /* PBXTargetDependency */,
 			);
 			name = cryptoProfit;
 			productName = cryptoProfit;
@@ -379,9 +460,12 @@
 		4D903C9325B59C4700B9C251 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1230;
+				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1230;
 				TargetAttributes = {
+					4D39D96325E18A8E009C7C9F = {
+						CreatedOnToolsVersion = 12.4;
+					};
 					4D903C9A25B59C4700B9C251 = {
 						CreatedOnToolsVersion = 12.3;
 					};
@@ -411,11 +495,24 @@
 				4D903C9A25B59C4700B9C251 /* cryptoProfit */,
 				4D903CAB25B59C4B00B9C251 /* cryptoProfitTests */,
 				4D903CB625B59C4B00B9C251 /* cryptoProfitUITests */,
+				4D39D96325E18A8E009C7C9F /* CryptoWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		4D39D96225E18A8E009C7C9F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D39D99425E1B49E009C7C9F /* quantico.regular.ttf in Resources */,
+				4D39D98925E1B496009C7C9F /* quantico.bold-italic.ttf in Resources */,
+				4D39D96D25E18A90009C7C9F /* Assets.xcassets in Resources */,
+				4D39D98E25E1B499009C7C9F /* quantico.bold.ttf in Resources */,
+				4D39D98F25E1B49B009C7C9F /* quantico.italic.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4D903C9925B59C4700B9C251 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -549,6 +646,17 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4D39D96025E18A8E009C7C9F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D39D98425E18C99009C7C9F /* UserDefaultConfig.swift in Sources */,
+				4D39D97A25E18C0B009C7C9F /* CoinMarket.swift in Sources */,
+				4D39D96B25E18A8E009C7C9F /* CryptoWidget.swift in Sources */,
+				4D39D97F25E18C11009C7C9F /* PurchasedCoin.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4D903C9725B59C4700B9C251 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -591,6 +699,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		4D39D97025E18A90009C7C9F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4D39D96325E18A8E009C7C9F /* CryptoWidgetExtension */;
+			targetProxy = 4D39D96F25E18A90009C7C9F /* PBXContainerItemProxy */;
+		};
 		4D903CAE25B59C4B00B9C251 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 4D903C9A25B59C4700B9C251 /* cryptoProfit */;
@@ -604,6 +717,50 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		4D39D97325E18A90009C7C9F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q58BT3DDCP;
+				INFOPLIST_FILE = CryptoWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.musakokcen.cryptoProfit.CryptoWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4D39D97425E18A90009C7C9F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q58BT3DDCP;
+				INFOPLIST_FILE = CryptoWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.musakokcen.cryptoProfit.CryptoWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		4D903CBE25B59C4B00B9C251 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -724,6 +881,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3A987BF46658C79DEA251085 /* Pods-cryptoProfit.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -747,6 +905,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 48E31CBDCAE5DEDF16C418E4 /* Pods-cryptoProfit.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -853,6 +1012,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4D39D97525E18A90009C7C9F /* Build configuration list for PBXNativeTarget "CryptoWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D39D97325E18A90009C7C9F /* Debug */,
+				4D39D97425E18A90009C7C9F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4D903C9625B59C4700B9C251 /* Build configuration list for PBXProject "cryptoProfit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -37,7 +37,8 @@ struct CoinView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 24) {
-                        Spacer().frame(width: .none, height: 0, alignment: .center)
+                        Spacer()
+                            .frame(width: .none, height: 0, alignment: .center)
                         coinIcon
                             .resizable()
                             .aspectRatio(contentMode: .fit)
