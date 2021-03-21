@@ -15,7 +15,7 @@ struct UserDefaultsConfig {
 struct UserDefaultProperty<Value: Codable> {
     let key: String
     let defaultValue: Value
-    var storage: UserDefaults = .standard
+    var storage: UserDefaults =  UserDefaults(suiteName: "group.musakokcen.cryptoProfit")!
     
     struct Wrapper<Value>: Codable where Value: Codable {
         let wrapped: Value
@@ -40,7 +40,7 @@ struct UserDefaultProperty<Value: Codable> {
 }
 
 extension UserDefaultProperty where Value: ExpressibleByNilLiteral {
-    init(key: String, storage: UserDefaults = .standard) {
+    init(key: String, storage: UserDefaults =  UserDefaults(suiteName: "group.musakokcen.cryptoProfit")!) {
         self.init(key: key, defaultValue: nil, storage: storage)
     }
 }

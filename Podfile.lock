@@ -90,6 +90,9 @@ PODS:
     - nanopb/encode (= 2.30907.0)
   - nanopb/decode (2.30907.0)
   - nanopb/encode (2.30907.0)
+  - NVActivityIndicatorView (5.1.1):
+    - NVActivityIndicatorView/Base (= 5.1.1)
+  - NVActivityIndicatorView/Base (5.1.1)
   - PromisesObjC (1.2.12)
   - Purchases (3.10.2):
     - PurchasesCoreSwift (= 3.10.2)
@@ -107,6 +110,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - Kingfisher (~> 6.0)
   - MBProgressHUD
+  - NVActivityIndicatorView
   - Purchases
   - SwiftLint
 
@@ -131,6 +135,7 @@ SPEC REPOS:
     - Kingfisher
     - MBProgressHUD
     - nanopb
+    - NVActivityIndicatorView
     - PromisesObjC
     - Purchases
     - PurchasesCoreSwift
@@ -156,11 +161,12 @@ SPEC CHECKSUMS:
   Kingfisher: adde87a4f74f6a3845395769354efff593581740
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   nanopb: 59221d7f958fb711001e6a449489542d92ae113e
+  NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   Purchases: 21017feccb2bd2f50c65f690be2ceddf40bf09ce
   PurchasesCoreSwift: db1370f94aab8c9bc64fcf0bafd767d3504a5f95
   SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
 
-PODFILE CHECKSUM: 7c8455a81ab3247f44396475320e4165ae8ca7c5
+PODFILE CHECKSUM: 1b6a0d5aa8de58a039b8fdaf61ba6539f8c8a488
 
 COCOAPODS: 1.10.1

@@ -28,4 +28,20 @@ target 'cryptoProfit' do
     # Pods for testing
   end
 
+  target 'CryptoWidgetExtension' do
+    pod 'Kingfisher', '~> 6.0'
+    pod 'Alamofire'
+    pod 'SwiftLint'
+    pod 'NVActivityIndicatorView'
+
+#    pod 'Firebase/Analytics'
+#    pod 'Firebase/Crashlytics'
+#    pod 'Firebase/RemoteConfig'
+#    pod 'MBProgressHUD'
+#    pod 'Purchases'
+#    pod 'Amplitude'
+#    pod 'AppsFlyerFramework'
+    
+  end
+  
 end
