@@ -48,6 +48,7 @@
 		4D903D8925B5CB5100B9C251 /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D903D8825B5CB5100B9C251 /* Coin.swift */; };
 		4D908DEA25B70D81001E501C /* CoinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D908DE925B70D81001E501C /* CoinView.swift */; };
 		4D908E3725B8E8FF001E501C /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D908E3625B8E8FF001E501C /* Currency.swift */; };
+		4DC750E82607CD5C00A42E21 /* CryptoCoinProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC750422607C95700A42E21 /* CryptoCoinProvider.swift */; };
 		7E5BB78B6DC1C6EBEA21EC70 /* Pods_cryptoProfit_cryptoProfitUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B121FFBD909C960AE231C73 /* Pods_cryptoProfit_cryptoProfitUITests.framework */; };
 		93906579181DD7FC02273BAF /* Pods_cryptoProfit_CryptoWidgetExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2368AF8218357CC6465863C /* Pods_cryptoProfit_CryptoWidgetExtension.framework */; };
 		BC117F6E097BE86CAE09AB73 /* Pods_cryptoProfit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3064B54BB4E4827793AA5AB /* Pods_cryptoProfit.framework */; };
@@ -136,6 +137,7 @@
 		4D903D8825B5CB5100B9C251 /* Coin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
 		4D908DE925B70D81001E501C /* CoinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinView.swift; sourceTree = "<group>"; };
 		4D908E3625B8E8FF001E501C /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
+		4DC750422607C95700A42E21 /* CryptoCoinProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCoinProvider.swift; sourceTree = "<group>"; };
 		9108810EEBB1724DA1FA6126 /* Pods-cryptoProfit-cryptoProfitUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cryptoProfit-cryptoProfitUITests.debug.xcconfig"; path = "Target Support Files/Pods-cryptoProfit-cryptoProfitUITests/Pods-cryptoProfit-cryptoProfitUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A40937F777434FCB678D3FBA /* Pods-cryptoProfit-cryptoProfitUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cryptoProfit-cryptoProfitUITests.release.xcconfig"; path = "Target Support Files/Pods-cryptoProfit-cryptoProfitUITests/Pods-cryptoProfit-cryptoProfitUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B06EFDCB2AA16C8DC29AA64C /* Pods-cryptoProfit-CryptoWidgetExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cryptoProfit-CryptoWidgetExtension.release.xcconfig"; path = "Target Support Files/Pods-cryptoProfit-CryptoWidgetExtension/Pods-cryptoProfit-CryptoWidgetExtension.release.xcconfig"; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				4D39D96A25E18A8E009C7C9F /* CryptoWidget.swift */,
+				4DC750422607C95700A42E21 /* CryptoCoinProvider.swift */,
 				4D899B9525EECEDB00643E46 /* InvestedCoinList.swift */,
 				4D39D96C25E18A90009C7C9F /* Assets.xcassets */,
 				4D39D96E25E18A90009C7C9F /* Info.plist */,
@@ -691,6 +694,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DC750E82607CD5C00A42E21 /* CryptoCoinProvider.swift in Sources */,
 				4D39D98425E18C99009C7C9F /* UserDefaultConfig.swift in Sources */,
 				4D39D97A25E18C0B009C7C9F /* CoinMarket.swift in Sources */,
 				4D07BF5F25EC2FD10046EF6D /* NetworkManager.swift in Sources */,
