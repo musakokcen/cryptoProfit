@@ -27,30 +27,46 @@ struct CryptoWidgetEntryView : View {
     var entry: CryptoCoinEntry
     @Environment(\.widgetFamily) var family
 
-    @State private var investmentList: [PurchasedCoin] =  UserDefaultsConfig.purchasedCryptoCoins ?? []
+    @State private var investmentList: [PurchasedCoin] =  UserDefaultsConfig.purchasedCryptoCoins ?? [] {
+        didSet {
+            print("investment list", investmentList.count)
+        }
+    }
 
-//    @State var investmentCoinInfo: PurchasedCoin? = nil
     var body: some View {
-        Text("widget\(entry.coinInfo?.first?.name ?? "no result")")
-//        VStack {
-//            HStack {
-//                Text("Crypto Profit")
-//                    .padding()
+        VStack {
+            HStack {
+                Text("Crypto Profit")
+                    .padding()
+                Spacer()
+            }
+            .font(Font.custom("Quantico-Regular", size: 12))
+//            if let coins = entry.coins {
+            ForEach(investmentList, id: \.id) { coin in
+//                    InvestedCoinList(coin: coin)
+                if let purchasedCoin = getPurchasedCoin(for: coin) {
+//                    InvestedCoinList(coin: purchasedCoin)
+                    InvestedCoinList(coin: PurchasedCoin(purchasedPrice: coin.purchasedPrice, purchasedAmount: coin.purchasedAmount, id: coin.id, symbol: coin.symbol, name: coin.name, image: coin.image, latestPrice: purchasedCoin.currentPrice, lastUpdated: purchasedCoin.lastUpdated))
+                } else {
+//                    Text("data for the invested coin could not be loaded")
+                    InvestedCoinList(coin: coin)
+                }
+                }
+               
+//            } else {
 //                Spacer()
+//                Text("Loading...\(entry.coins?.first?.name ?? "coin name")")
+//                    .font(Font.custom("Quantico-Regular", size: 12))
 //            }
-//            .font(Font.custom("Quantico-Regular", size: 12))
-////            if let coins = entry.coins {
-//            ForEach(entry.coins ?? [], id: \.id) { coin in
-////                    InvestedCoinList(coin: coin)
-//                InvestedCoinList(coin: PurchasedCoin(purchasedPrice: "1", purchasedAmount: "1", id: coin.id, symbol: coin.symbol, name: coin.name, image: coin.image, latestPrice: coin.currentPrice, lastUpdated: coin.lastUpdated))
-//                }
-////            } else {
-////                Spacer()
-////                Text("Loading...\(entry.coins?.first?.name ?? "coin name")")
-////                    .font(Font.custom("Quantico-Regular", size: 12))
-////            }
-//            Spacer()
-//        }
+            Spacer()
+        }
+    }
+    
+    private func getPurchasedCoin(for coin: PurchasedCoin) -> CoinMarketData? {
+        if let fetchedCoin = entry.coinInfo?.first(where: {$0.symbol == coin.symbol}) {
+            return fetchedCoin
+        }
+        return nil
     }
 }
 
