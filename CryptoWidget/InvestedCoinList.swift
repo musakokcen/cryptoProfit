@@ -38,9 +38,9 @@ struct InvestedCoinList: View {
                 .foregroundColor(profitValue > 0 ?  .green : .red)
                 .font(.system(size: 20, weight: .thin))
             
-            Text("%\(profitPercentage, specifier: "%.2f"))")
+            Text("%\(profitPercentage, specifier: "%.2f")")
                 .frame(width: .none, height: .none, alignment: .leading)
-            Text("\(profitValue)")
+            Text("\(profitValue, specifier: "%.2f")$")
                 .frame(width: .none, height: .none, alignment: .leading)
             
         }
