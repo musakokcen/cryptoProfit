@@ -45,19 +45,15 @@ struct CryptoWidgetEntryView : View {
             ForEach(investmentList, id: \.id) { coin in
 //                    InvestedCoinList(coin: coin)
                 if let purchasedCoin = getPurchasedCoin(for: coin) {
-//                    InvestedCoinList(coin: purchasedCoin)
-                    InvestedCoinList(coin: PurchasedCoin(purchasedPrice: coin.purchasedPrice, purchasedAmount: coin.purchasedAmount, id: coin.id, symbol: coin.symbol, name: coin.name, image: coin.image, latestPrice: purchasedCoin.currentPrice, lastUpdated: purchasedCoin.lastUpdated))
+                    if let purchasedPrice = Double(coin.purchasedPrice), let amount = Double(coin.purchasedAmount) {
+                        let profit = (coin.latestPrice - purchasedPrice) * amount
+                        let perc = ((coin.latestPrice / purchasedPrice) - 1) * 100
+                        InvestedCoinList(coin: PurchasedCoin(purchasedPrice: coin.purchasedPrice, purchasedAmount: coin.purchasedAmount, id: coin.id, symbol: coin.symbol, name: coin.name, image: coin.image, latestPrice: purchasedCoin.currentPrice, lastUpdated: purchasedCoin.lastUpdated), profit: profit, profitPercentage: perc)
+                    }
                 } else {
-//                    Text("data for the invested coin could not be loaded")
-                    InvestedCoinList(coin: coin)
+                    InvestedCoinList(coin: coin, profit: 0, profitPercentage: 0)
                 }
                 }
-               
-//            } else {
-//                Spacer()
-//                Text("Loading...\(entry.coins?.first?.name ?? "coin name")")
-//                    .font(Font.custom("Quantico-Regular", size: 12))
-//            }
             Spacer()
         }
     }
@@ -66,6 +62,7 @@ struct CryptoWidgetEntryView : View {
         if let fetchedCoin = entry.coinInfo?.first(where: {$0.symbol == coin.symbol}) {
             return fetchedCoin
         }
+        print("could not fetch coin")
         return nil
     }
 }

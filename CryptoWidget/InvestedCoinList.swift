@@ -10,17 +10,16 @@ import WidgetKit
 
 struct InvestedCoinList: View {
     var coin: PurchasedCoin
+    var profitValue: Double
+    var profitPercentage: Double
+    
     @State var coinIcon = Image(systemName: "creditcard.circle")
     
-    @State var profitValue: Double = 0
-    @State var profitPercentage: Double = 0
     
-    init(coin: PurchasedCoin) {
+    init(coin: PurchasedCoin, profit: Double, profitPercentage: Double) {
         self.coin = coin
-        if let purchasedPrice = Double(coin.purchasedPrice), let amount = Double(coin.purchasedAmount) {
-            self.profitValue =  (coin.latestPrice - purchasedPrice) * amount
-            self.profitPercentage = (profitValue / (purchasedPrice * amount)) * 100
-        }
+        self.profitValue = profit
+        self.profitPercentage = profitPercentage
     }
     
     var body: some View {
@@ -33,13 +32,13 @@ struct InvestedCoinList: View {
                 .font(Font.custom("Quantico-Bold", size: 12))
                 .textCase(.uppercase)
                 .frame(width: .none, height: .none, alignment: .leading)
-            Text("\(profitValue, specifier: "%.2f")$")
+            Text("\(coin.latestPrice)") // "\(profitValue, specifier: "%.2f")$")
                 .frame(width: .none, height: .none, alignment: .leading)
             Image(systemName: profitValue > 0 ? "arrow.up.square.fill" : "arrow.down.square.fill")
                 .foregroundColor(profitValue > 0 ?  .green : .red)
                 .font(.system(size: 20, weight: .thin))
             
-            Text("\(profitPercentage)")
+            Text("%\(profitPercentage, specifier: "%.2f"))")
                 .frame(width: .none, height: .none, alignment: .leading)
             Text("\(profitValue)")
                 .frame(width: .none, height: .none, alignment: .leading)
