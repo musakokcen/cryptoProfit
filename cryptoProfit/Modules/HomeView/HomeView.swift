@@ -7,6 +7,28 @@
 
 import SwiftUI
 
+struct HomeViewConstants {
+    static let navigationBarFont: UIFont? = UIFont(name: "Quantico-Regular", size: 36)
+    static let pickerTitle: Text = Text(Localizable.viewSelection)
+    static let popularCoins: Text = Text(Localizable.popularCoins)
+    static let investedCoins: Text = Text(Localizable.investedCoins)
+    static let loadMore: String = Localizable.loadMore
+    static let loadMoreColor: UIColor = UIColor(named: "whiteColor")!
+    static let loadMoreFont: Font = Font.custom("Quantico-Regular", size: 20)
+    static let scrollBarFont: Font = Font.custom("Quantico-Regular", size: 16)
+    static let coinsPerPage: Int = 50
+    
+    struct SearchBar {
+        static let icon: String = "magnifyingglass"
+        static let search: String = "Search"
+        static let cancel: String = "xmark.circle.fill"
+        static let padding: EdgeInsets = EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6)
+        static let cornerRadius: CGFloat = 10
+        static let cancelText: String = "Cancel"
+    }
+
+}
+
 struct HomeView: View {
     @State private var coinList: [CoinMarketData] = []
     @State private var investmentList: [PurchasedCoin]? = UserDefaultsConfig.purchasedCryptoCoins {
@@ -14,11 +36,8 @@ struct HomeView: View {
             selectedView = (investmentList?.count ?? 0) > 0 ? 1 : 0
         }
     }
-    
     @State private var selectedView = (UserDefaultsConfig.purchasedCryptoCoins?.count ?? 0) > 0 ? 1 : 0
-    
     @State private var fetchedCoinListPage = 1
-    
     @State private var searchText = ""
     @State private var showCancelButton: Bool = false
 
@@ -27,7 +46,9 @@ struct HomeView: View {
         UINavigationBar.appearance().backgroundColor = .clear
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         UINavigationBar.appearance().shadowImage = UIImage()
-        UINavigationBar.appearance().titleTextAttributes = [.font : UIFont(name: "Quantico-Regular", size: 36)!]
+        if let font = HomeViewConstants.navigationBarFont {
+            UINavigationBar.appearance().titleTextAttributes = [.font : font]
+        }
     }
     
     var body: some View {
@@ -36,9 +57,9 @@ struct HomeView: View {
                 LazyVStack {
                     HStack {
                         Spacer()
-                        Picker(selection: $selectedView, label: Text("View Selection")) {
-                            Text("Popular Coins").tag(0)
-                            Text("Invested Coins").tag(1)
+                        Picker(selection: $selectedView, label: HomeViewConstants.pickerTitle) {
+                            HomeViewConstants.popularCoins.tag(0)
+                            HomeViewConstants.investedCoins.tag(1)
                         }
                         .pickerStyle(SegmentedPickerStyle())
                         .padding()
@@ -47,9 +68,9 @@ struct HomeView: View {
                     if selectedView == 0 {
                         HStack {
                             HStack {
-                                Image(systemName: "magnifyingglass")
+                                Image(systemName: HomeViewConstants.SearchBar.icon)
 
-                                TextField("search", text: $searchText, onEditingChanged: { isEditing in
+                                TextField(HomeViewConstants.SearchBar.search, text: $searchText, onEditingChanged: { isEditing in
                                     self.showCancelButton = true
                                 }, onCommit: {
                                     print("onCommit")
@@ -58,16 +79,16 @@ struct HomeView: View {
                                 Button(action: {
                                     self.searchText = ""
                                 }) {
-                                    Image(systemName: "xmark.circle.fill").opacity(searchText == "" ? 0 : 1)
+                                    Image(systemName: HomeViewConstants.SearchBar.cancel).opacity(searchText == "" ? 0 : 1)
                                 }
                             }
-                            .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
+                            .padding(HomeViewConstants.SearchBar.padding)
                             .foregroundColor(.secondary)
                             .background(Color(.secondarySystemBackground))
-                            .cornerRadius(10.0)
+                            .cornerRadius(HomeViewConstants.SearchBar.cornerRadius)
 
                             if showCancelButton  {
-                                Button("Cancel") {
+                                Button(HomeViewConstants.SearchBar.cancelText) {
                                         UIApplication.shared.endEditing(true) // this must be placed before the other commands here
                                         self.searchText = ""
                                         self.showCancelButton = false
@@ -76,16 +97,16 @@ struct HomeView: View {
                             }
                         }
                         .padding(.horizontal)
-                        .navigationBarHidden(showCancelButton) // .animation(.default) // animation does not work properly
+                        .navigationBarHidden(showCancelButton)
                         ForEach(coinList.filter{$0.name.contains(searchText) || searchText == ""}, id: \.id) { coin in
                             CoinListItem(coin: coin)
                         }
                         Spacer()
-                        Button("Load More") {
+                        Button(HomeViewConstants.loadMore) {
                             fetchCoinList()
                         }
-                        .foregroundColor(Color(UIColor(named: "whiteColor")!))
-                        .font(Font.custom("Quantico-Regular", size: 20))
+                        .foregroundColor(Color(HomeViewConstants.loadMoreColor))
+                        .font(HomeViewConstants.loadMoreFont)
                     } else {
                         if let investmentList = investmentList {
                             ForEach(investmentList, id: \.id) { coin in
@@ -98,13 +119,13 @@ struct HomeView: View {
                 }
                 .resignKeyboardOnDragGesture()
             }
-            .font(Font.custom("Quantico-Regular", size: 16))
+            .font(HomeViewConstants.scrollBarFont)
             .onAppear(perform: {
                 if investmentList != UserDefaultsConfig.purchasedCryptoCoins {
                     investmentList = UserDefaultsConfig.purchasedCryptoCoins
                 }
             })
-            .navigationBarTitle("Crypto Profit", displayMode: .inline)
+            .navigationBarTitle(Localizable.cryptoProfit, displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                 }
@@ -119,7 +140,7 @@ struct HomeView: View {
     
     private func fetchCoinList() {
         DispatchQueue.main.async {
-            NetworkManager.shared.request(type: [CoinMarketData].self, endpoint: Endpoint.coinMarketData(query: coinMarketDataParams(currency: "usd", ids: nil, coinsPerPage: 50, page: fetchedCoinListPage, priceChangeRange: nil))) { (result) in
+            NetworkManager.shared.request(type: [CoinMarketData].self, endpoint: Endpoint.coinMarketData(query: coinMarketDataParams(currency: Currency.USD.name.lowercased(), ids: nil, coinsPerPage: HomeViewConstants.coinsPerPage, page: fetchedCoinListPage, priceChangeRange: nil))) { (result) in
                 switch result {
                 case .success(let data):
                     let sortedData = data.sorted{$0.marketCap > $1.marketCap }
@@ -140,7 +161,6 @@ struct HomeView_Previews: PreviewProvider {
         HomeView()
     }
 }
-
 
 // search bar extensions
 extension UIApplication {

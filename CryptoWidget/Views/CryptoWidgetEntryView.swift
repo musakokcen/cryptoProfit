@@ -8,42 +8,26 @@
 import WidgetKit
 import SwiftUI
 
-@main
-struct CryptoWidget: Widget {
-    let kind: String = "CryptoWidget"
-    
-    var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: CryptoCoinTimelineProvider(), content: { entry in
-            CryptoWidgetEntryView(entry: entry)
-        })
-        
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
-        .supportedFamilies([.systemLarge])
-    }
+struct CryptoWidgetConstants {
+    static let title: String = Localizable.cryptoProfit
+    static let font: Font = Font.custom("Quantico-Regular", size: 12)
 }
 
 struct CryptoWidgetEntryView : View {
+    
     var entry: CryptoCoinEntry
     @Environment(\.widgetFamily) var family
-
-    @State private var investmentList: [PurchasedCoin] =  UserDefaultsConfig.purchasedCryptoCoins ?? [] {
-        didSet {
-            print("investment list", investmentList.count)
-        }
-    }
-
+    @State private var investmentList: [PurchasedCoin] =  UserDefaultsConfig.purchasedCryptoCoins ?? []
+    
     var body: some View {
         VStack {
             HStack {
-                Text("Crypto Profit")
+                Text(CryptoWidgetConstants.title)
                     .padding()
                 Spacer()
             }
-            .font(Font.custom("Quantico-Regular", size: 12))
-//            if let coins = entry.coins {
+            .font(CryptoWidgetConstants.font)
             ForEach(investmentList, id: \.id) { coin in
-//                    InvestedCoinList(coin: coin)
                 if let purchasedCoin = getPurchasedCoin(for: coin) {
                     if let purchasedPrice = Double(coin.purchasedPrice), let amount = Double(coin.purchasedAmount) {
                         let profit = (coin.latestPrice - purchasedPrice) * amount
@@ -53,7 +37,7 @@ struct CryptoWidgetEntryView : View {
                 } else {
                     InvestedCoinList(coin: coin, profit: 0, profitPercentage: 0)
                 }
-                }
+            }
             Spacer()
         }
     }

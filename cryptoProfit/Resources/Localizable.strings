@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  cryptoProfit
+
+  Created by Musa Kokcen on 25.03.2021.
+  
+*/
+"cryptoProfit" = "Crypto Profit";
+"viewSelection" = "View Selection";
+"popularCoins" = "Popular Coins";
+"investedCoins" = "Invested Coins";
+"loadMore" = "Load More";

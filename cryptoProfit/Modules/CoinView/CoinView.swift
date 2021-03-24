@@ -216,40 +216,4 @@ struct CoinView: View {
         
         presentationMode.wrappedValue.dismiss()
     }
-    
 }
-/*
-struct CoinView_Previews: PreviewProvider {
-    static var previews: some View {
-        let data = CoinMarketData(
-            id: "bitcoin",
-            symbol : "btc",
-            name : "Bitcoin",
-            image : "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
-            currentPrice : 33904.0456,
-            marketCap : 630362181507,
-            marketCapRank : 1,
-            fullyDilutedValuation: 0,
-            totalVolume: 0,
-            high24H: 0,
-            low24H: 0,
-            priceChange24H: 0,
-            priceChangePercentage24H: 3.0555,
-            marketCapChange24H: 0,
-            marketCapChangePercentage24H: 0,
-            circulatingSupply: 0,
-            totalSupply: 0,
-            maxSupply: 0,
-            ath: 0,
-            athChangePercentage: 0,
-            athDate: "string",
-            atl: 0,
-            atlChangePercentage: 0,
-            atlDate: "String",
-            roi: nil,
-            lastUpdated: "String")
-        
-        CoinView(coin: data, coinIcon: Image(systemName: "creditcard.circle"))
-    }
-}
-*/
