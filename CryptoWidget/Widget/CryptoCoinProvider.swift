@@ -7,11 +7,11 @@
 
 import Foundation
 import WidgetKit
+import Kingfisher
 
 struct CryptoCoinEntry: TimelineEntry {
     public let date: Date
-    public let coinInfo: [CoinMarketData]?
-    public var isPlaceholder = false
+    public let coinInfo: [WidgetCoinData]?
 }
 
 extension CryptoCoinEntry {
@@ -21,8 +21,7 @@ extension CryptoCoinEntry {
     }
     
     static var placeholder: CryptoCoinEntry {
-        CryptoCoinEntry(date: Date(), coinInfo: nil, isPlaceholder: true)
-        
+        CryptoCoinEntry(date: Date(), coinInfo: nil)
     }
 }
 
@@ -67,18 +66,42 @@ struct CryptoCoinTimelineProvider: TimelineProvider {
     }
     
     private func fetchTotalGlobalCaseStats(completion: @escaping (Result<CryptoCoinEntry, Error>) -> ()) {
-        service.request(type: [CoinMarketData].self, endpoint: Endpoint.coinMarketData(query: coinMarketDataParams(currency: "usd", ids: nil, coinsPerPage: 50, page: 1, priceChangeRange: nil))) { (result) in
+        service.request(type: [CoinMarketData].self, endpoint: Endpoint.coinMarketData(query: coinMarketDataParams(currency: Currency.USD.name.lowercased().replacingOccurrences(of: " ", with: ""), ids: nil, coinsPerPage: 50, page: 1, priceChangeRange: nil))) { (result) in
             switch result {
             case .success(let data):
                 let sortedData = data.sorted{$0.marketCap > $1.marketCap }
-                let currentDate = Date()
-                
-                completion(.success(CryptoCoinEntry(date: currentDate, coinInfo: sortedData)))
-                print("network call is successfull: ")
+                fetchIcon(data: sortedData) { (coinsWithIcons) in
+                    let currentDate = Date()
+                    
+                    completion(.success(CryptoCoinEntry(date: currentDate, coinInfo: coinsWithIcons)))
+                    print("network call is successfull: ")
+                }
+
                 
             case .failure(let err):
                 print("network call is unsuccesfull: ", err)
                 completion(.failure(err))
+            }
+        }
+    }
+    
+    private func fetchIcon(data: [CoinMarketData], completion: @escaping ([WidgetCoinData]) -> ()) {
+        var finalData: [WidgetCoinData] = []
+        for index in 0..<data.count{
+            let resource = ImageResource(downloadURL: URL(string: data[index].image)!)
+            KingfisherManager.shared.retrieveImage(with: resource) { (result) in
+                switch result {
+                case .success(let imageData):
+                    finalData.append(WidgetCoinData(coin: data[index], image: imageData.image))
+                    if index == data.count - 1 {
+                        completion(finalData)
+                    }
+                case .failure(_):
+                    finalData.append(WidgetCoinData(coin: data[index], image: UIImage(systemName: "creditcard.circle")!))
+                    if index == data.count - 1 {
+                        completion(finalData)
+                    }
+                }
             }
         }
     }

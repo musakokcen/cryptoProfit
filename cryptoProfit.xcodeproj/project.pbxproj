@@ -10,6 +10,8 @@
 		0EF4168A713E56287FFD7F75 /* Pods_cryptoProfitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD1FE5966A655ED41B8A96E /* Pods_cryptoProfitTests.framework */; };
 		4D07BF5F25EC2FD10046EF6D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D903CF625B5AE4C00B9C251 /* NetworkManager.swift */; };
 		4D07BF6425EC2FDD0046EF6D /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D903D8325B5C56100B9C251 /* Endpoint.swift */; };
+		4D33352F2618B68D005CE9DD /* WidgetCoinData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D33352E2618B68D005CE9DD /* WidgetCoinData.swift */; };
+		4D3335342618B718005CE9DD /* WidgetCoinData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D33352E2618B68D005CE9DD /* WidgetCoinData.swift */; };
 		4D39D95325E17668009C7C9F /* quantico.bold-italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D39D95025E17623009C7C9F /* quantico.bold-italic.ttf */; };
 		4D39D95725E1766B009C7C9F /* quantico.bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D39D95125E17623009C7C9F /* quantico.bold.ttf */; };
 		4D39D95825E1766E009C7C9F /* quantico.italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D39D95225E17624009C7C9F /* quantico.italic.ttf */; };
@@ -46,6 +48,7 @@
 		4D903D8425B5C56100B9C251 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D903D8325B5C56100B9C251 /* Endpoint.swift */; };
 		4D908DEA25B70D81001E501C /* CoinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D908DE925B70D81001E501C /* CoinView.swift */; };
 		4D908E3725B8E8FF001E501C /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D908E3625B8E8FF001E501C /* Currency.swift */; };
+		4DA7254A2618C49100F7482A /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D908E3625B8E8FF001E501C /* Currency.swift */; };
 		4DC750E82607CD5C00A42E21 /* CryptoCoinProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC750422607C95700A42E21 /* CryptoCoinProvider.swift */; };
 		4DDBC0E8260BE5D900610ED1 /* CryptoWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDBC0E7260BE5D900610ED1 /* CryptoWidget.swift */; };
 		4DDBC0FF260BE70800610ED1 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDBC0FE260BE70800610ED1 /* Localizable.swift */; };
@@ -101,6 +104,7 @@
 		3A987BF46658C79DEA251085 /* Pods-cryptoProfit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cryptoProfit.debug.xcconfig"; path = "Target Support Files/Pods-cryptoProfit/Pods-cryptoProfit.debug.xcconfig"; sourceTree = "<group>"; };
 		3B121FFBD909C960AE231C73 /* Pods_cryptoProfit_cryptoProfitUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cryptoProfit_cryptoProfitUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		48E31CBDCAE5DEDF16C418E4 /* Pods-cryptoProfit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cryptoProfit.release.xcconfig"; path = "Target Support Files/Pods-cryptoProfit/Pods-cryptoProfit.release.xcconfig"; sourceTree = "<group>"; };
+		4D33352E2618B68D005CE9DD /* WidgetCoinData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetCoinData.swift; sourceTree = "<group>"; };
 		4D39D94F25E17622009C7C9F /* quantico.regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = quantico.regular.ttf; sourceTree = "<group>"; };
 		4D39D95025E17623009C7C9F /* quantico.bold-italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "quantico.bold-italic.ttf"; sourceTree = "<group>"; };
 		4D39D95125E17623009C7C9F /* quantico.bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = quantico.bold.ttf; sourceTree = "<group>"; };
@@ -368,6 +372,7 @@
 			children = (
 				4D63A00C25C6D4FC00C849B0 /* CoinMarket.swift */,
 				4D8E660925C729CD0051C656 /* PurchasedCoin.swift */,
+				4D33352E2618B68D005CE9DD /* WidgetCoinData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -709,12 +714,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DA7254A2618C49100F7482A /* Currency.swift in Sources */,
 				4DC750E82607CD5C00A42E21 /* CryptoCoinProvider.swift in Sources */,
 				4D39D98425E18C99009C7C9F /* UserDefaultConfig.swift in Sources */,
 				4DDBC10F260BE7C800610ED1 /* Localizable.swift in Sources */,
 				4D39D97A25E18C0B009C7C9F /* CoinMarket.swift in Sources */,
 				4D07BF5F25EC2FD10046EF6D /* NetworkManager.swift in Sources */,
 				4DDBC0E8260BE5D900610ED1 /* CryptoWidget.swift in Sources */,
+				4D3335342618B718005CE9DD /* WidgetCoinData.swift in Sources */,
 				4D39D96B25E18A8E009C7C9F /* CryptoWidgetEntryView.swift in Sources */,
 				4D07BF6425EC2FDD0046EF6D /* Endpoint.swift in Sources */,
 				4D899B9B25EECF4100643E46 /* InvestedCoinList.swift in Sources */,
@@ -736,6 +743,7 @@
 				4D63A03325C6E12200C849B0 /* CoinListItem.swift in Sources */,
 				4D63A00825C6D38400C849B0 /* HomeView.swift in Sources */,
 				4D908E3725B8E8FF001E501C /* Currency.swift in Sources */,
+				4D33352F2618B68D005CE9DD /* WidgetCoinData.swift in Sources */,
 				4D8E661825C736130051C656 /* InvestmentListItem.swift in Sources */,
 				4D899B9625EECEDB00643E46 /* InvestedCoinList.swift in Sources */,
 				4D8E660525C713D30051C656 /* UIViewExtension.swift in Sources */,
@@ -792,7 +800,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q58BT3DDCP;
 				INFOPLIST_FILE = CryptoWidget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -816,7 +824,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q58BT3DDCP;
 				INFOPLIST_FILE = CryptoWidget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -959,7 +967,7 @@
 				DEVELOPMENT_TEAM = Q58BT3DDCP;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = cryptoProfit/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -984,7 +992,7 @@
 				DEVELOPMENT_TEAM = Q58BT3DDCP;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = cryptoProfit/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

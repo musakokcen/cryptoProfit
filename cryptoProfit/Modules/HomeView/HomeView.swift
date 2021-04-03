@@ -140,7 +140,7 @@ struct HomeView: View {
     
     private func fetchCoinList() {
         DispatchQueue.main.async {
-            NetworkManager.shared.request(type: [CoinMarketData].self, endpoint: Endpoint.coinMarketData(query: coinMarketDataParams(currency: Currency.USD.name.lowercased(), ids: nil, coinsPerPage: HomeViewConstants.coinsPerPage, page: fetchedCoinListPage, priceChangeRange: nil))) { (result) in
+            NetworkManager.shared.request(type: [CoinMarketData].self, endpoint: Endpoint.coinMarketData(query: coinMarketDataParams(currency: Currency.USD.name.lowercased().replacingOccurrences(of: " ", with: ""), ids: nil, coinsPerPage: HomeViewConstants.coinsPerPage, page: fetchedCoinListPage, priceChangeRange: nil))) { (result) in
                 switch result {
                 case .success(let data):
                     let sortedData = data.sorted{$0.marketCap > $1.marketCap }
