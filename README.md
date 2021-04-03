@@ -9,8 +9,7 @@ Good implementation of the technologies used in this project is the main purpose
 
 # Technology
 
-SwiftUI 
-Widget API
+SwiftUI, WidgetKit
 
 # Data
 Coingecko 
